@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zhl.job.dao.IAccountflowDao" >
+  <resultMap id="Accountflow" type="com.zhl.job.pojo.Accountflow" >
+    <id column="ID" property="accountId" jdbcType="VARCHAR" />
+    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <result column="SUBACCNO_ID" property="subaccnoId" jdbcType="VARCHAR" />
+    <result column="ACCOUNT_NO" property="accountNo" jdbcType="VARCHAR" />
+    <result column="ADDITIONAL" property="additional" jdbcType="VARCHAR" />
+    <result column="TOTAL" property="total" jdbcType="DECIMAL" />
+    <result column="USE_AMOUNT" property="useAmount" jdbcType="DECIMAL" />
+    <result column="NO_USE_AMOUNT" property="noUseAmount" jdbcType="DECIMAL" />
+    <result column="AMOUNT" property="amount" jdbcType="DECIMAL" />
+    <result column="BALANCE" property="balance" jdbcType="DECIMAL" />
+    <result column="OPEN_BANK" property="openBank" jdbcType="VARCHAR" />
+    <result column="OPPO_BANK" property="oppoBank" jdbcType="VARCHAR" />
+    <result column="OPPO_NO" property="oppoNo" jdbcType="VARCHAR" />
+    <result column="SUMMARY" property="summary" jdbcType="VARCHAR" />
+    <result column="SUMMARY_CODE" property="summaryCode" jdbcType="VARCHAR" />
+    <result column="TRANS_DATE" property="transDate" jdbcType="TIMESTAMP" />
+    <result column="TRANS_DIRECTION" property="transDirection" jdbcType="VARCHAR" />
+    <result column="TRANS_FLOW_NO" property="transFlowNo" jdbcType="VARCHAR" />
+    <result column="TRANS_TIME" property="transTime" jdbcType="TIMESTAMP" />
+    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+    <result column="STATE" property="state" jdbcType="VARCHAR" />
+    <result column="CREATEDATE" property="createdate" jdbcType="TIMESTAMP" />
+    <result column="ISDEL" property="isdel" jdbcType="VARCHAR" />
+    <result column="RET_TN" property="retTn" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, USER_ID, SUBACCNO_ID, ACCOUNT_NO, ADDITIONAL, TOTAL, USE_AMOUNT, NO_USE_AMOUNT, 
+    AMOUNT, BALANCE, OPEN_BANK, OPPO_BANK, OPPO_NO, SUMMARY, SUMMARY_CODE, TRANS_DATE, 
+    TRANS_DIRECTION, TRANS_FLOW_NO, TRANS_TIME, TYPE, STATE, CREATEDATE, ISDEL, RET_TN
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="Accountflow" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from ACCOUNTFLOW
+    where ID = #{accountId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from ACCOUNTFLOW
+    where ID = #{accountId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insertSelective" parameterType="com.zhl.job.pojo.Accountflow" >
+    insert into ACCOUNTFLOW
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="accountId != null" >
+       ID,
+      </if>
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="subaccnoId != null" >
+        SUBACCNO_ID,
+      </if>
+      <if test="accountNo != null" >
+        ACCOUNT_NO,
+      </if>
+      <if test="additional != null" >
+        ADDITIONAL,
+      </if>
+      <if test="total != null" >
+        TOTAL,
+      </if>
+      <if test="useAmount != null" >
+        USE_AMOUNT,
+      </if>
+      <if test="noUseAmount != null" >
+        NO_USE_AMOUNT,
+      </if>
+      <if test="amount != null" >
+        AMOUNT,
+      </if>
+      <if test="balance != null" >
+        BALANCE,
+      </if>
+      <if test="openBank != null" >
+        OPEN_BANK,
+      </if>
+      <if test="oppoBank != null" >
+        OPPO_BANK,
+      </if>
+      <if test="oppoNo != null" >
+        OPPO_NO,
+      </if>
+      <if test="summary != null" >
+        SUMMARY,
+      </if>
+      <if test="summaryCode != null" >
+        SUMMARY_CODE,
+      </if>
+      <if test="transDate != null" >
+        TRANS_DATE,
+      </if>
+      <if test="transDirection != null" >
+        TRANS_DIRECTION,
+      </if>
+      <if test="transFlowNo != null" >
+        TRANS_FLOW_NO,
+      </if>
+      <if test="transTime != null" >
+        TRANS_TIME,
+      </if>
+      <if test="type != null" >
+        TYPE,
+      </if>
+      <if test="state != null" >
+        STATE,
+      </if>
+      <if test="createdate != null" >
+        CREATEDATE,
+      </if>
+      <if test="isdel != null" >
+        ISDEL,
+      </if>
+       <if test="retTn != null" >
+        RET_TN,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="accountId != null" >
+        #{accountId,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="subaccnoId != null" >
+        #{subaccnoId,jdbcType=VARCHAR},
+      </if>
+      <if test="accountNo != null" >
+        #{accountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="additional != null" >
+        #{additional,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null" >
+        #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="useAmount != null" >
+        #{useAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="noUseAmount != null" >
+        #{noUseAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="balance != null" >
+        #{balance,jdbcType=DECIMAL},
+      </if>
+      <if test="openBank != null" >
+        #{openBank,jdbcType=VARCHAR},
+      </if>
+      <if test="oppoBank != null" >
+        #{oppoBank,jdbcType=VARCHAR},
+      </if>
+      <if test="oppoNo != null" >
+        #{oppoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null" >
+        #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="summaryCode != null" >
+        #{summaryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="transDate != null" >
+        #{transDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transDirection != null" >
+        #{transDirection,jdbcType=VARCHAR},
+      </if>
+      <if test="transFlowNo != null" >
+        #{transFlowNo,jdbcType=VARCHAR},
+      </if>
+      <if test="transTime != null" >
+        #{transTime,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        #{createdate,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        #{isdel,jdbcType=VARCHAR},
+      </if>
+       <if test="retTn != null" >
+        #{retTn,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhl.job.pojo.Accountflow" >
+    update ACCOUNTFLOW
+    <set >
+      <if test="userId != null" >
+        USER_ID = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="subaccnoId != null" >
+        SUBACCNO_ID = #{subaccnoId,jdbcType=VARCHAR},
+      </if>
+      <if test="accountNo != null" >
+        ACCOUNT_NO = #{accountNo,jdbcType=VARCHAR},
+      </if>
+      <if test="additional != null" >
+        ADDITIONAL = #{additional,jdbcType=VARCHAR},
+      </if>
+      <if test="total != null" >
+        TOTAL = #{total,jdbcType=DECIMAL},
+      </if>
+      <if test="useAmount != null" >
+        USE_AMOUNT = #{useAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="noUseAmount != null" >
+        NO_USE_AMOUNT = #{noUseAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null" >
+        AMOUNT = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="balance != null" >
+        BALANCE = #{balance,jdbcType=DECIMAL},
+      </if>
+      <if test="openBank != null" >
+        OPEN_BANK = #{openBank,jdbcType=VARCHAR},
+      </if>
+      <if test="oppoBank != null" >
+        OPPO_BANK = #{oppoBank,jdbcType=VARCHAR},
+      </if>
+      <if test="oppoNo != null" >
+        OPPO_NO = #{oppoNo,jdbcType=VARCHAR},
+      </if>
+      <if test="summary != null" >
+        SUMMARY = #{summary,jdbcType=VARCHAR},
+      </if>
+      <if test="summaryCode != null" >
+        SUMMARY_CODE = #{summaryCode,jdbcType=VARCHAR},
+      </if>
+      <if test="transDate != null" >
+        TRANS_DATE = #{transDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="transDirection != null" >
+        TRANS_DIRECTION = #{transDirection,jdbcType=VARCHAR},
+      </if>
+      <if test="transFlowNo != null" >
+        TRANS_FLOW_NO = #{transFlowNo,jdbcType=VARCHAR},
+      </if>
+      <if test="transTime != null" >
+        TRANS_TIME = #{transTime,jdbcType=DECIMAL},
+      </if>
+      <if test="type != null" >
+        TYPE = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="state != null" >
+        STATE = #{state,jdbcType=VARCHAR},
+      </if>
+      <if test="createdate != null" >
+        CREATEDATE = #{createdate,jdbcType=VARCHAR},
+      </if>
+      <if test="isdel != null" >
+        ISDEL = #{isdel,jdbcType=VARCHAR},
+      </if>
+       <if test="retTn != null" >
+        RET_TN = #{retTn,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{accountId,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selectByUserId" parameterType="java.lang.String" resultMap="Accountflow">
+  	select * from ACCOUNTFLOW where USER_ID = #{userId,jdbcType=VARCHAR}
+  </select>
+
+  
+  <insert id="insertList" parameterType="java.util.List" useGeneratedKeys="false">
+  	insert into ACCOUNTFLOW (
+  	<include refid="Base_Column_List"/>
+  	)
+    <foreach collection="list" item="item" index="index" separator="union all">
+        (select 
+        #{item.accountId},#{item.userId},#{item.subaccnoId},
+        #{item.accountNo},#{item.additional},#{item.total},
+        #{item.useAmount},#{item.noUseAmount},#{item.amount},
+        #{item.balance},#{item.openBank},#{item.oppoBank},#{item.oppoNo},
+        #{item.summary},#{item.summaryCode},#{item.transDate},#{item.transDirection},
+        #{item.transFlowNo},#{item.transTime},#{item.type},#{item.state},
+        #{item.createdate},#{item.isdel},#{item.retTn} 
+        from dual)
+    </foreach>
+  </insert>
+  
+  
+  <!--  -->
+   <select id="selectByTransFlowNo" parameterType="java.lang.String" resultMap="Accountflow">
+  	select * from ACCOUNTFLOW where TRANS_FLOW_NO = #{transFlowNo,jdbcType=VARCHAR}
+  </select>
+<!-- 分页查询列表 -->
+	<select id="queryAccountflowPage" parameterType="map" resultMap="Accountflow">
+		select * from ACCOUNTFLOW where state='12'
+		order by CREATEDATE desc
+	</select>
+	
+	<select id="queryAccountflowHanding" parameterType="map" resultMap="Accountflow">
+		select * from ACCOUNTFLOW where state='09' and TYPE='01' and ISDEL='00'
+		and CREATEDATE&lt;sysdate and CREATEDATE&gt;sysdate-15
+		order by CREATEDATE desc
+	</select>
+</mapper>

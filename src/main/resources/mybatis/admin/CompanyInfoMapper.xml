@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhl.job.dao.ICompanyInfoDao">
+
+<resultMap id="CompanyInfoMapper" type="com.zhl.job.pojo.CompanyInfo" >
+	    <id column="C_ID" property="cid" jdbcType="VARCHAR" />
+	    <result column="USER_ID" property="userId" jdbcType="VARCHAR" /><!-- 登录id -->
+	    <result column="COMPANY_NAME" property="companyName" jdbcType="VARCHAR" /><!-- 公司名称 -->
+	    <result column="LOGO_IMG" property="logoImg" jdbcType="VARCHAR" /><!-- 企业logo地址 -->
+	    <result column="COMPANY_TYPE" property="companyType" jdbcType="VARCHAR" /><!--企业性质  -->
+	    
+	    <result column="COMPANY_PEOPLE_NUM" property="companyPeopleNum" jdbcType="VARCHAR" /><!--企业规模(公司人数)  -->
+	    <result column="TELEPHONE" property="telephone" jdbcType="VARCHAR" /><!--固定电话  -->
+	    
+	    <result column="MOBILE" property="mobile" jdbcType="VARCHAR" /><!--联系手机号  -->
+	    <result column="EMAIL" property="email" jdbcType="VARCHAR" /><!-- 公司邮箱  -->
+	    <result column="PROVINCE" property="province" jdbcType="VARCHAR" /><!-- 省 -->
+	    <result column="CITY" property="city" jdbcType="VARCHAR" /><!-- 市 -->
+	    <result column="AREA" property="area" jdbcType="VARCHAR" /><!--区县  -->
+	    <result column="ADDRESS_DETAIL" property="addressDetail" jdbcType="VARCHAR" /><!--  详细地址-->
+	    <result column="COMPANY_DETAIL" property="companyDetail" jdbcType="VARCHAR" /><!--公司简介  -->
+	    <result column="COMPANYID_NO" property="companyidNo" jdbcType="VARCHAR" />
+	    <result column="COMPANYID_IMG" property="companyidImg" jdbcType="VARCHAR" />
+	    <result column="AUTHENTICATION_LEVEL" property="authenticationLevel" jdbcType="VARCHAR" />
+	    <result column="COM_LEVEL" property="comLevel" jdbcType="VARCHAR" />
+	    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+	    <result column="STATE" property="state" jdbcType="VARCHAR" />
+	    <result column="CREATEDATE" property="createdate" jdbcType="TIMESTAMP" />
+	    <result column="ISDEL" property="isdel" jdbcType="VARCHAR" />
+	    <result column="UPDATEDATE" property="updatedate" jdbcType="TIMESTAMP" />
+	    <result column="UPDATEUSERID" property="updateUserId" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<insert id="insertOne" parameterType="com.zhl.job.pojo.CompanyInfo" >
+	    INSERT INTO COMPANYINFO  ( C_ID,COMPANY_NAME
+			<if test="userId != null">,USER_ID</if>
+			<if test="logoImg != null">,LOGO_IMG</if>
+			<if test="companyType != null">,COMPANY_TYPE</if>
+			
+			<if test="companyPeopleNum != null">,COMPANY_PEOPLE_NUM</if>
+			<if test="telephone != null">,TELEPHONE</if>
+			<if test="mobile != null">,MOBILE</if>
+			<if test="email != null">,EMAIL</if>
+			<if test="province != null">,PROVINCE</if>
+			<if test="city != null">,CITY</if>
+			<if test="area != null">,AREA</if>
+			<if test="addressDetail != null">,ADDRESS_DETAIL</if>
+			<if test="companyDetail != null">,COMPANY_DETAIL</if>
+			<if test="companyidNo != null">,COMPANYID_NO</if>
+			<if test="companyidImg != null">,COMPANYID_IMG</if>
+			<if test="authenticationLevel != null">,AUTHENTICATION_LEVEL</if>
+			<if test="comLevel != null">,COM_LEVEL</if>
+			<if test="type != null">,TYPE</if>
+			<if test="state != null">,STATE</if>
+			<if test="createdate != null">,CREATEDATE</if>
+			<if test="isdel != null">,ISDEL</if>
+			
+			 )
+			 VALUES( #{cid},#{companyName}
+			 <if test="userId != null">,#{userId}</if>
+			 <if test="logoImg != null">,#{logoImg}</if>
+			 <if test="companyType != null">,#{companyType}</if>
+			 
+			 <if test="companyPeopleNum != null">,#{companyPeopleNum}</if>
+			<if test="telephone != null">,#{telephone}</if>
+			<if test="mobile != null">,#{mobile}</if>
+			<if test="email != null">,#{email}</if>
+			<if test="province != null">,#{province}</if>
+			<if test="city != null">,#{city}</if>
+			<if test="area != null">,#{area}</if>
+			<if test="addressDetail != null">,#{addressDetail}</if>
+			<if test="companyDetail != null">,#{companyDetail}</if>
+			<if test="companyidNo != null">,#{companyidNo}</if>
+			<if test="companyidImg != null">,#{companyidImg}</if>
+			<if test="authenticationLevel != null">,#{authenticationLevel}</if>
+			<if test="comLevel != null">,#{comLevel}</if>
+			<if test="type != null">,#{type}</if>
+			<if test="state != null">,#{state}</if>
+			<if test="createdate != null">,#{createdate}</if>
+			<if test="isdel != null">,#{isdel}</if>
+			  )
+	</insert>
+	
+	<select id="getCompanyInfoByCid" resultMap="CompanyInfoMapper" parameterType="com.zhl.job.pojo.CompanyInfo" >
+		select * from COMPANYINFO where C_ID = #{cid} 
+	</select>
+	
+	<select id="getCompanyInfoByUserId" resultMap="CompanyInfoMapper" parameterType="com.zhl.job.pojo.UserLogInfo" >
+		select * from COMPANYINFO where USER_ID = #{id} 
+	</select>
+	
+<!--  CompanyInfoMapper-->
+	<update id="updateOneByCid"  parameterType="com.zhl.job.pojo.CompanyInfo">
+		update COMPANYINFO set
+		<!-- ,BANK_BRAN_ID =#{bankBranId} -->
+		     COMPANY_NAME = #{companyName}
+			<if test="userId != null">,USER_ID=#{userId}</if>
+			<if test="logoImg != null">,LOGO_IMG=#{logoImg}</if>
+			<if test="companyType != null">,COMPANY_TYPE=#{companyType}</if>
+			
+			<if test="companyPeopleNum != null">,COMPANY_PEOPLE_NUM=#{companyPeopleNum}</if>
+			<if test="telephone != null">,TELEPHONE=#{telephone}</if>
+			<if test="mobile != null">,MOBILE=#{mobile}</if>
+			<if test="email != null">,EMAIL=#{email}</if>
+			<if test="province != null">,PROVINCE=#{province}</if>
+			<if test="city != null">,CITY=#{city}</if>
+			<if test="area != null">,AREA=#{area}</if>
+			<if test="addressDetail != null">,ADDRESS_DETAIL=#{addressDetail}</if>
+			<if test="companyDetail != null">,COMPANY_DETAIL=#{companyDetail}</if>
+			<if test="companyidNo != null">,COMPANYID_NO=#{companyidNo}</if>
+			<if test="companyidImg != null">,COMPANYID_IMG=#{companyidImg}</if>
+			<if test="authenticationLevel != null">,AUTHENTICATION_LEVEL=#{authenticationLevel}</if>
+			<if test="comLevel != null">,COM_LEVEL=#{comLevel}</if>
+			<if test="type != null">,TYPE=#{type}</if>
+			<if test="state != null">,STATE=#{state}</if>
+			<if test="createdate != null">,CREATEDATE=#{createdate}</if>
+			<if test="isdel != null">,ISDEL=#{isdel}</if>
+			
+			<if test="updatedate != null">,UPDATEDATE=#{updatedate}</if>
+			<if test="updateUserId != null">,UPDATEUSERID=#{updateUserId}</if>
+		where C_ID = #{cid} 
+	</update>
+	
+	<select id="queryCompanyInfoPageForManager" parameterType="map" resultMap="CompanyInfoMapper">
+		select * from COMPANYINFO 
+			<if test="state != null and state != ''">
+		<where>
+				and state = #{state} 
+		</where>
+			</if>
+		order by STATE asc,CREATEDATE desc
+	</select>
+	
+	<update id="updateCompanyByCid"  parameterType="com.zhl.job.pojo.CompanyInfo">
+		update COMPANYINFO set
+			STATE=#{state},
+			UPDATEDATE=#{updatedate},
+			UPDATEUSERID=#{updateUserId} 
+		where C_ID = #{cid} 
+	</update>
+</mapper>

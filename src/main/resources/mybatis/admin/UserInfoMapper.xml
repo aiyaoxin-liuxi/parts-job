@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhl.job.dao.IUserInfoDao"> 
+	<resultMap id="UserInfo" type="com.zhl.job.pojo.UserInfo" >
+	    <id column="P_ID" property="pid" jdbcType="VARCHAR" />
+	    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+	    <result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+	    <result column="REALNAME" property="realname" jdbcType="VARCHAR" />
+	    <result column="SEX" property="sex" jdbcType="VARCHAR" />
+	    <result column="ID_TYPE" property="idType" jdbcType="VARCHAR" />
+	    <result column="ID_NUMBER" property="idNumber" jdbcType="VARCHAR" />
+	    <result column="LIVE_PROVINCE" property="liveProvince" jdbcType="VARCHAR" />
+	    <result column="LIVE_CITY" property="liveCity" jdbcType="VARCHAR" />
+	    <result column="LIVE_AREA" property="liveArea" jdbcType="VARCHAR" />
+	    <result column="EDUCATION_STATE" property="educationState" jdbcType="VARCHAR" />
+	    <result column="ID_FRONT_IMG" property="idFrontImg" jdbcType="VARCHAR" />
+	    <result column="ID_BACK_IMG" property="idBackImg" jdbcType="VARCHAR" />
+	    <result column="ID_PORTRAIT_IMG" property="idPortraitImg" jdbcType="VARCHAR" />
+	    <result column="ID_SHOOT_MV" property="idShootMv" jdbcType="VARCHAR" />
+	    <result column="GRADUATE_SCHOOL" property="graduateSchool" jdbcType="VARCHAR" />
+	    <result column="SCHOOL_YEAR" property="schoolYear" jdbcType="VARCHAR" />
+	    <result column="FACULTY" property="faculty" jdbcType="VARCHAR" />
+	    <result column="EDUCATION" property="education" jdbcType="VARCHAR" />
+	    <result column="NETWORK_ID_IMG" property="networkIdImg" jdbcType="VARCHAR" />
+	    <result column="SID_PORTRAIT_IMG" property="sidPortraitImg" jdbcType="VARCHAR" />
+	    <result column="HEAD_IMG" property="headImg" jdbcType="VARCHAR" />
+	    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+	    <result column="QQ" property="qq" jdbcType="VARCHAR" />
+	    <result column="WECHAT" property="wechat" jdbcType="VARCHAR" />
+	    <result column="U_COMMENT" property="comment" jdbcType="VARCHAR" />
+	    <result column="REAL_LEVEL" property="realLevel" jdbcType="VARCHAR" />
+	    <result column="U_LEVEL" property="level" jdbcType="VARCHAR" />
+	    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+	    <result column="STATE" property="state" jdbcType="VARCHAR" />
+	    <result column="CREATEDATE" property="createdate" jdbcType="TIMESTAMP" />
+	    <result column="ISDEL" property="isdel" jdbcType="VARCHAR" />
+	    <!-- private Date updateDate;//UPDATE_DATE //updateUserId;//UPDATE_USER_ID
+		private String updateUserId;//UPDATE_USER_ID
+		20170407 add
+		 -->
+	  <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP" />
+	 <result column="UPDATE_USER_ID" property="updateUserId" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List" >
+	    P_ID, USER_ID, MOBILE, REALNAME, SEX, ID_TYPE, ID_NUMBER, LIVE_PROVINCE, LIVE_CITY, 
+	    LIVE_AREA, EDUCATION_STATE, ID_FRONT_IMG, ID_BACK_IMG, ID_PORTRAIT_IMG, ID_SHOOT_MV, 
+	    GRADUATE_SCHOOL, SCHOOL_YEAR, FACULTY, EDUCATION, NETWORK_ID_IMG, SID_PORTRAIT_IMG, 
+	    HEAD_IMG, EMAIL, QQ, WECHAT, U_COMMENT, REAL_LEVEL, U_LEVEL, TYPE, STATE, CREATEDATE, 
+	    ISDEL,UPDATE_DATE,UPDATE_USER_ID
+	 </sql>
+	<insert id="insertSelective" parameterType="com.zhl.job.pojo.UserInfo" >
+	    insert into USERINFO
+	    <trim prefix="(" suffix=")" suffixOverrides="," >
+	      <if test="pid != null" >
+	        P_ID,
+	      </if>
+	      <if test="userId != null" >
+	        USER_ID,
+	      </if>
+	      <if test="mobile != null" >
+	        MOBILE,
+	      </if>
+	      <if test="realname != null" >
+	        REALNAME,
+	      </if>
+	      <if test="sex != null" >
+	        SEX,
+	      </if>
+	      <if test="idType != null" >
+	        ID_TYPE,
+	      </if>
+	      <if test="idNumber != null" >
+	        ID_NUMBER,
+	      </if>
+	      <if test="liveProvince != null" >
+	        LIVE_PROVINCE,
+	      </if>
+	      <if test="liveCity != null" >
+	        LIVE_CITY,
+	      </if>
+	      <if test="liveArea != null" >
+	        LIVE_AREA,
+	      </if>
+	      <if test="educationState != null" >
+	        EDUCATION_STATE,
+	      </if>
+	      <if test="idFrontImg != null" >
+	        ID_FRONT_IMG,
+	      </if>
+	      <if test="idBackImg != null" >
+	        ID_BACK_IMG,
+	      </if>
+	      <if test="idPortraitImg != null" >
+	        ID_PORTRAIT_IMG,
+	      </if>
+	      <if test="idShootMv != null" >
+	        ID_SHOOT_MV,
+	      </if>
+	      <if test="graduateSchool != null" >
+	        GRADUATE_SCHOOL,
+	      </if>
+	      <if test="schoolYear != null" >
+	        SCHOOL_YEAR,
+	      </if>
+	      <if test="faculty != null" >
+	        FACULTY,
+	      </if>
+	      <if test="education != null" >
+	        EDUCATION,
+	      </if>
+	      <if test="networkIdImg != null" >
+	        NETWORK_ID_IMG,
+	      </if>
+	      <if test="sidPortraitImg != null" >
+	        SID_PORTRAIT_IMG,
+	      </if>
+	      <if test="headImg != null" >
+	        HEAD_IMG,
+	      </if>
+	      <if test="email != null" >
+	        EMAIL,
+	      </if>
+	      <if test="qq != null" >
+	        QQ,
+	      </if>
+	      <if test="wechat != null" >
+	        WECHAT,
+	      </if>
+	      <if test="comment != null" >
+	        U_COMMENT,
+	      </if>
+	      <if test="realLevel != null" >
+	        REAL_LEVEL,
+	      </if>
+	      <if test="level != null" >
+	        U_LEVEL,
+	      </if>
+	      <if test="type != null" >
+	        TYPE,
+	      </if>
+	      <if test="state != null" >
+	        STATE,
+	      </if>
+	      <if test="createdate != null" >
+	        CREATEDATE,
+	      </if>
+	      <if test="isdel != null" >
+	        ISDEL,
+	      </if>
+	      <if test="updateDate != null" >
+	        UPDATE_DATE,
+	      </if>
+	      <if test="updateUserId != null" >
+	        UPDATE_USER_ID,
+	      </if>
+	     
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides="," >
+	      <if test="pid != null" >
+	        #{pid,jdbcType=VARCHAR},
+	      </if>
+	      <if test="userId != null" >
+	        #{userId,jdbcType=VARCHAR},
+	      </if>
+	      <if test="mobile != null" >
+	        #{mobile,jdbcType=VARCHAR},
+	      </if>
+	      <if test="realname != null" >
+	        #{realname,jdbcType=VARCHAR},
+	      </if>
+	      <if test="sex != null" >
+	        #{sex,jdbcType=VARCHAR},
+	      </if>
+	      <if test="idType != null" >
+	        #{idType,jdbcType=VARCHAR},
+	      </if>
+	      <if test="idNumber != null" >
+	        #{idNumber,jdbcType=VARCHAR},
+	      </if>
+	      <if test="liveProvince != null" >
+	        #{liveProvince,jdbcType=VARCHAR},
+	      </if>
+	      <if test="liveCity != null" >
+	        #{liveCity,jdbcType=VARCHAR},
+	      </if>
+	      <if test="liveArea != null" >
+	        #{liveArea,jdbcType=VARCHAR},
+	      </if>
+	      <if test="educationState != null" >
+	        #{educationState,jdbcType=VARCHAR},
+	      </if>
+	      <if test="idFrontImg != null" >
+	        #{idFrontImg,jdbcType=VARCHAR},
+	      </if>
+	      <if test="idBackImg != null" >
+	        #{idBackImg,jdbcType=VARCHAR},
+	      </if>
+	      <if test="idPortraitImg != null" >
+	        #{idPortraitImg,jdbcType=VARCHAR},
+	      </if>
+	      <if test="idShootMv != null" >
+	        #{idShootMv,jdbcType=VARCHAR},
+	      </if>
+	      <if test="graduateSchool != null" >
+	        #{graduateSchool,jdbcType=VARCHAR},
+	      </if>
+	      <if test="schoolYear != null" >
+	        #{schoolYear,jdbcType=VARCHAR},
+	      </if>
+	      <if test="faculty != null" >
+	        #{faculty,jdbcType=VARCHAR},
+	      </if>
+	      <if test="education != null" >
+	        #{education,jdbcType=VARCHAR},
+	      </if>
+	      <if test="networkIdImg != null" >
+	        #{networkIdImg,jdbcType=VARCHAR},
+	      </if>
+	      <if test="sidPortraitImg != null" >
+	        #{sidPortraitImg,jdbcType=VARCHAR},
+	      </if>
+	      <if test="headImg != null" >
+	        #{headImg,jdbcType=VARCHAR},
+	      </if>
+	      <if test="email != null" >
+	        #{email,jdbcType=VARCHAR},
+	      </if>
+	      <if test="qq != null" >
+	        #{qq,jdbcType=VARCHAR},
+	      </if>
+	      <if test="wechat != null" >
+	        #{wechat,jdbcType=VARCHAR},
+	      </if>
+	      <if test="comment != null" >
+	        #{comment,jdbcType=VARCHAR},
+	      </if>
+	      <if test="realLevel != null" >
+	        #{realLevel,jdbcType=VARCHAR},
+	      </if>
+	      <if test="level != null" >
+	        #{level,jdbcType=VARCHAR},
+	      </if>
+	      <if test="type != null" >
+	        #{type,jdbcType=VARCHAR},
+	      </if>
+	      <if test="state != null" >
+	        #{state,jdbcType=VARCHAR},
+	      </if>
+	      <if test="createdate != null" >
+	        #{createdate,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="isdel != null" >
+	        #{isdel,jdbcType=VARCHAR},
+	      </if>
+	       <!-- updateDate;//UPDATE_DATE //updateUserId;//UPDATE_USER_ID -->
+	       <if test="updateDate != null" >
+	        #{updateDate,jdbcType=TIMESTAMP},
+	       </if>
+	      <if test="updateUserId != null" >
+	        #{updateUserId,jdbcType=VARCHAR},
+	      </if>
+	    </trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.zhl.job.pojo.UserInfo" >
+	    update USERINFO
+	    <set>
+	      <if test="userId != null" >
+	        USER_ID = #{userId,jdbcType=VARCHAR},
+	      </if>
+	      <if test="mobile != null" >
+	        MOBILE = #{mobile,jdbcType=VARCHAR},
+	      </if>
+	      <if test="realname != null" >
+	        REALNAME = #{realname,jdbcType=VARCHAR},
+	      </if>
+	      <if test="sex != null" >
+	        SEX = #{sex,jdbcType=VARCHAR},
+	      </if>
+	      <if test="idType != null" >
+	        ID_TYPE = #{idType,jdbcType=VARCHAR},
+	      </if>
+	      <if test="idNumber != null" >
+	        ID_NUMBER = #{idNumber,jdbcType=VARCHAR},
+	      </if>
+	      <if test="liveProvince != null" >
+	        LIVE_PROVINCE = #{liveProvince,jdbcType=VARCHAR},
+	      </if>
+	      <if test="liveCity != null" >
+	        LIVE_CITY = #{liveCity,jdbcType=VARCHAR},
+	      </if>
+	      <if test="liveArea != null" >
+	        LIVE_AREA = #{liveArea,jdbcType=VARCHAR},
+	      </if>
+	      <if test="educationState != null" >
+	        EDUCATION_STATE = #{educationState,jdbcType=VARCHAR},
+	      </if>
+	      <if test="idFrontImg != null" >
+	        ID_FRONT_IMG = #{idFrontImg,jdbcType=VARCHAR},
+	      </if>
+	      <if test="idBackImg != null" >
+	        ID_BACK_IMG = #{idBackImg,jdbcType=VARCHAR},
+	      </if>
+	      <if test="idPortraitImg != null" >
+	        ID_PORTRAIT_IMG = #{idPortraitImg,jdbcType=VARCHAR},
+	      </if>
+	      <if test="idShootMv != null" >
+	        ID_SHOOT_MV = #{idShootMv,jdbcType=VARCHAR},
+	      </if>
+	      <if test="graduateSchool != null" >
+	        GRADUATE_SCHOOL = #{graduateSchool,jdbcType=VARCHAR},
+	      </if>
+	      <if test="schoolYear != null" >
+	        SCHOOL_YEAR = #{schoolYear,jdbcType=VARCHAR},
+	      </if>
+	      <if test="faculty != null" >
+	        FACULTY = #{faculty,jdbcType=VARCHAR},
+	      </if>
+	      <if test="education != null" >
+	        EDUCATION = #{education,jdbcType=VARCHAR},
+	      </if>
+	      <if test="networkIdImg != null" >
+	        NETWORK_ID_IMG = #{networkIdImg,jdbcType=VARCHAR},
+	      </if>
+	      <if test="sidPortraitImg != null" >
+	        SID_PORTRAIT_IMG = #{sidPortraitImg,jdbcType=VARCHAR},
+	      </if>
+	      <if test="headImg != null" >
+	        HEAD_IMG = #{headImg,jdbcType=VARCHAR},
+	      </if>
+	      <if test="email != null" >
+	        EMAIL = #{email,jdbcType=VARCHAR},
+	      </if>
+	      <if test="qq != null" >
+	        QQ = #{qq,jdbcType=VARCHAR},
+	      </if>
+	      <if test="wechat != null" >
+	        WECHAT = #{wechat,jdbcType=VARCHAR},
+	      </if>
+	      <if test="comment != null" >
+	        U_COMMENT = #{comment,jdbcType=VARCHAR},
+	      </if>
+	      <if test="realLevel != null" >
+	        REAL_LEVEL = #{realLevel,jdbcType=VARCHAR},
+	      </if>
+	      <if test="level != null" >
+	        U_LEVEL = #{level,jdbcType=VARCHAR},
+	      </if>
+	      <if test="type != null" >
+	        TYPE = #{type,jdbcType=VARCHAR},
+	      </if>
+	      <if test="state != null" >
+	        STATE = #{state,jdbcType=VARCHAR},
+	      </if>
+	      <if test="createdate != null" >
+	        CREATEDATE = #{createdate,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="isdel != null" >
+	        ISDEL = #{isdel,jdbcType=VARCHAR},
+	      </if>
+	      <!-- updateDate;//UPDATE_DATE //updateUserId;//UPDATE_USER_ID -->
+	      <if test="updateDate != null" >
+	       UPDATE_DATE= #{updateDate,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="updateUserId != null" >
+	       UPDATE_USER_ID= #{updateUserId,jdbcType=VARCHAR},
+	      </if>
+	    </set>
+	    where P_ID = #{pid,jdbcType=VARCHAR}
+	</update>
+	<select id="selectByUserId" parameterType="java.lang.String" resultMap="UserInfo">
+		select * from USERINFO where USER_ID = #{userId,jdbcType=VARCHAR} 
+	</select>
+	<select id="selectByPid" parameterType="java.lang.String" resultMap="UserInfo">
+		select * from USERINFO where P_ID = #{pid,jdbcType=VARCHAR}
+	</select>
+</mapper>

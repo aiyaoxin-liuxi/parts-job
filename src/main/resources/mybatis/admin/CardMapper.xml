@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhl.job.dao.ICardDao">
+
+<resultMap id="CardMapper" type="com.zhl.job.pojo.Card" >
+	    <id column="ID" property="id" jdbcType="VARCHAR" />
+	    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+	    <result column="SUBACCNO_ID" property="subaccnoId" jdbcType="VARCHAR" />
+	    <result column="ACCOUNT_ID" property="accountId" jdbcType="VARCHAR" />
+	    <result column="BANKNAME" property="bankname" jdbcType="VARCHAR" />
+	    <result column="BANKNO" property="bankno" jdbcType="VARCHAR" />
+	    <result column="BINDDATE" property="binddate" jdbcType="TIMESTAMP" />
+	    <result column="BIND_IDCARD" property="bindIdcard" jdbcType="VARCHAR" />
+	    <result column="BIND_STATE" property="bindState" jdbcType="VARCHAR" /> 
+	    <result column="CARD_NAME" property="cardName" jdbcType="VARCHAR" />
+	    <result column="CARD_NO" property="cardNo" jdbcType="VARCHAR" />
+	    <result column="CARD_TYPE" property="cardType" jdbcType="VARCHAR" />
+	    <result column="PROVINCE" property="province" jdbcType="VARCHAR" />
+	    <result column="CITY" property="city" jdbcType="VARCHAR" />
+	    <result column="AREA" property="area" jdbcType="VARCHAR" />
+	    <result column="BANK" property="bank" jdbcType="VARCHAR" />
+	    <result column="BRANCK" property="branck" jdbcType="VARCHAR" />
+	    <result column="CREATEDATE" property="createdate" jdbcType="TIMESTAMP" />
+	    <result column="TYPE" property="type" jdbcType="VARCHAR" />
+	    <result column="STATE" property="state" jdbcType="VARCHAR" />
+	    <result column="ISDEL" property="isdel" jdbcType="VARCHAR" />
+	    <result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+	    
+</resultMap>
+	
+	<insert id="insertOne" parameterType="com.zhl.job.pojo.Card" >
+	    INSERT INTO CARD  ( ID,USER_ID
+	    <if test="subaccnoId != null">,SUBACCNO_ID</if>
+	    <if test="accountId != null">,ACCOUNT_ID</if>
+	    <if test="bankname != null">,BANKNAME</if>
+	    <if test="bankno != null">,BANKNO</if>
+	    <if test="binddate != null">,BINDDATE</if>
+	    <if test="bindIdcard != null">,BIND_IDCARD</if>
+	    <if test="bindState != null">,BIND_STATE</if>
+	    <if test="cardName != null">,CARD_NAME</if>
+	    <if test="cardNo != null">,CARD_NO</if>
+	    <if test="cardType != null">,CARD_TYPE</if>
+	    <if test="province != null">,PROVINCE</if>
+	    <if test="city != null">,CITY</if>
+	    <if test="area != null">,AREA</if>
+	    <if test="bank != null">,BANK</if>
+	    <if test="branck != null">,BRANCK</if>
+	    <if test="createdate != null">,CREATEDATE</if>
+	    <if test="type != null">,TYPE</if>
+	    <if test="state != null">,STATE</if>
+	    <if test="isdel != null">,ISDEL</if>
+	    <if test="mobile != null">,MOBILE</if>
+	    
+	    
+			 )
+			 VALUES( #{id},#{userId}
+			  <if test="subaccnoId != null">,#{subaccnoId}</if>
+			  
+			  <if test="accountId != null">,#{accountId}</if>
+			  <if test="bankname != null">,#{bankname}</if>
+			  <if test="bankno != null">,#{bankno}</if>
+			  <if test="binddate != null">,#{binddate}</if>
+			  <if test="bindIdcard != null">,#{bindIdcard}</if>
+			  <if test="bindState != null">,#{bindState}</if>
+			  <if test="cardName != null">,#{cardName}</if>
+			  <if test="cardNo != null">,#{cardNo}</if>
+			  <if test="cardType != null">,#{cardType}</if>
+			  <if test="province != null">,#{province}</if>
+			  <if test="city != null">,#{city}</if>
+			  <if test="area != null">,#{area}</if>
+			  <if test="bank != null">,#{bank}</if>
+			  <if test="branck != null">,#{branck}</if>
+			  <if test="createdate != null">,#{createdate}</if>
+			  <if test="type != null">,#{type}</if>
+			  <if test="state != null">,#{state}</if>
+			  <if test="isdel != null">,#{isdel}</if>
+			  <if test="mobile != null">,#{mobile}</if>
+			  )
+	</insert>
+	<!--  -->
+	<select id="getCardById" resultMap="CardMapper" parameterType="com.zhl.job.pojo.Card" >
+		select * from CARD where ID = #{id} 
+	</select>
+	<!--  -->
+	<select id="getCardByUserId" resultMap="CardMapper" parameterType="com.zhl.job.pojo.Card" >
+		select * from CARD where USER_ID = #{userId} 
+	</select>
+	
+	<update id="updateIsdelOneById"  parameterType="com.zhl.job.pojo.Card">
+			update CARD set
+		    ISDEL = #{isdel}
+			where ID = #{id} 
+	</update>
+	<!--  -->
+	<select id="getCardByUserIdAndCardNo" resultMap="CardMapper" parameterType="com.zhl.job.pojo.Card" >
+		select * from CARD where USER_ID = #{userId} and CARD_NO= #{cardNo}
+		 <if test="isdel != null">and  ISDEL = #{isdel} </if>
+	</select>
+	
+	
+	
+	<select id="selectCardsByUserIdAndIsdel" resultMap="CardMapper" parameterType="com.zhl.job.pojo.Card" >
+		select * from CARD where  USER_ID = #{userId} and  ISDEL = #{isdel}
+	</select>
+	<!--  getCardByIdAndIsdel  -->
+	<select id="getCardByIdAndIsdel" resultMap="CardMapper" parameterType="com.zhl.job.pojo.Card" >
+		select * from CARD where  ID = #{id} and  ISDEL = #{isdel}
+	</select>
+	
+</mapper>

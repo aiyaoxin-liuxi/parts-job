@@ -1,0 +1,498 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhl.job.dao.IApplyInfoDao">
+
+	<resultMap type="com.zhl.job.pojo.ApplyInfo" id="applyMap">
+		<id property="id" column="ID" jdbcType="VARCHAR"/>
+		<id property="userId" column="USER_ID" jdbcType="VARCHAR" />
+		<result property="pid" column="P_ID" jdbcType="VARCHAR" />
+		<result property="workId" column="WORK_ID" jdbcType="VARCHAR" />
+		<result property="applyDetail" column="APPLY_DETAIL" jdbcType="VARCHAR" />
+		<result property="applyWorkDate" column="APPLY_WORK_DATE" jdbcType="TIMESTAMP" />
+		<result property="applyWorkTime" column="APPLY_WORK_TIME" jdbcType="VARCHAR"/>
+		<result property="appComment" column="APP_COMMENT" jdbcType="VARCHAR" />
+		<result property="employ" column="EMPLOY" jdbcType="VARCHAR" />
+		<result property="type" column="TYPE" jdbcType="VARCHAR" />
+		<result property="state" column="STATE" jdbcType="VARCHAR" />
+		<result property="createdate" column="CREATEDATE" jdbcType="TIMESTAMP" />
+		<result property="isdel" column="ISDEL" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap type="ApplyInfo" id="applyAndWorkAllMap" extends="applyMap">
+		<association property="workInfo" javaType="WorkInfo">
+			<id property="id" column="W_ID" />
+			<result property="userId" column="W_USER_ID" />
+			<result property="cid" column="C_ID" />
+			<result property="workTitle" column="WORK_TITLE" />
+			<result property="workDetail" column="WORK_DETAIL" />
+			<result property="jobName" column="JOB_NAME" />
+			<result property="jobType" column="JOB_TYPE" />
+			<result property="require" column="REQUIRE" />
+			<result property="sexRequire" column="SEX_REQUIRE" />
+			<result property="workMeal" column="WORK_MEAL" />
+			<result property="province" column="PROVINCE" />
+			<result property="city" column="CITY" />
+			<result property="cityName" column="CITY_NAME" />
+			<result property="area" column="AREA" />
+			<result property="areaName" column="AREA_NAME" />
+			<result property="addressDetail" column="ADDRESS_DETAIL" />
+			<result property="releaseStartDate" column="RELEASE_START_DATE" />
+			<result property="applyEndDate" column="APPLY_END_DATE" />
+			<result property="workStartDate" column="WORK_START_DATE" />
+			<result property="workEndDate" column="WORK_END_DATE" />
+			<result property="workTime" column="WORK_TIME" />
+			<result property="allowChooseDate" column="ALLOW_CHOOSE_DATE" />
+			<result property="workHour" column="WORK_HOUR" />
+			<result property="peopleNum" column="PEOPLE_NUM" />
+			<result property="balanceType" column="BALANCE_TYPE" />
+			<result property="money" column="MONEY" />
+			<result property="moneyType" column="MONEY_TYPE" />
+			<result property="workdayNum" column="WORKDAY_NUM" />
+			<result property="contacts" column="CONTACTS" />
+			<result property="contactsMobile" column="CONTACTS_MOBILE" />
+			<result property="contactsEmail" column="CONTACTS_EMAIL" />
+			<result property="agreement" column="AGREEMENT" />
+			<result property="longitude" column="LONGITUDE" />
+			<result property="latitude" column="LATITUDE" />
+			<result property="releaseType" column="RELEASE_TYPE" />
+			<result property="type" column="W_TYPE" />
+			<result property="state" column="W_STATE" />
+			<result property="createdate" column="W_CREATEDATE" />
+			<result property="interview" column="INTERVIEW" />
+			<result property="applySwitch" column="APPLY_SWITCH" jdbcType="VARCHAR" />
+			<result property="isdel" column="W_ISDEL" />
+		</association>
+	</resultMap>
+	<resultMap type="ApplyInfo" id="workAllMap" extends="applyAndWorkAllMap">
+		<association property="workInfoStatis" javaType="WorkInfoStatis">
+    		<id property="id" column="WS_ID"/>
+    		<result property="workId" column="WS_WORK_ID"/>
+    		<result property="loadNum" column="LOAD_NUM"/>
+    		<result property="applyNum" column="APPLY_NUM"/>
+    		<result property="commentNum" column="COMMENT_NUM"/>
+    		<result property="attentionNum" column="ATTENTION_NUM"/>
+    		<result property="employNum" column="EMPLOY_NUM" />
+    		
+    		<result property="type" column="WS_TYPE"/>
+    		<result property="state" column="WS_STATE"/>
+    		<result property="createdate" column="WS_CREATEDATE"/>
+    		<result property="isdel" column="WS_ISDEL"/>
+    	</association>
+	</resultMap>
+	<resultMap type="ApplyInfo" id="workAndCompanyMap" extends="workAllMap">
+		<association property="companyInfo" javaType="CompanyInfo">
+			<id property="cid" column="C_ID"/>
+		    <result property="companyName" column="COMPANY_NAME"/>
+		    <result property="logoImg" column="LOGO_IMG"/>
+		    <result property="companyType" column="COMPANY_TYPE"/>
+		    <result property="companyPeopleNum" column="COMPANY_PEOPLE_NUM"/>
+		    <result property="companyDetail" column="COMPANY_DETAIL"/>
+		</association>
+	</resultMap>
+	
+	
+	
+	<resultMap type="ApplyInfo" id="applyAndUserInfoMap" extends="applyMap">
+		<association property="userInfo" javaType="UserInfo">
+			<id column="U_P_ID" property="pid" jdbcType="VARCHAR" />
+		    <result column="U_USER_ID" property="userId" jdbcType="VARCHAR" />
+		    <result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+		    <result column="REALNAME" property="realname" jdbcType="VARCHAR" />
+		    <result column="SEX" property="sex" jdbcType="VARCHAR" />
+		    <result column="ID_TYPE" property="idType" jdbcType="VARCHAR" />
+		    <result column="ID_NUMBER" property="idNumber" jdbcType="VARCHAR" />
+		    <result column="LIVE_PROVINCE" property="liveProvince" jdbcType="VARCHAR" />
+		    <result column="LIVE_CITY" property="liveCity" jdbcType="VARCHAR" />
+		    <result column="LIVE_AREA" property="liveArea" jdbcType="VARCHAR" />
+		    <result column="EDUCATION_STATE" property="educationState" jdbcType="VARCHAR" />
+		    <result column="ID_FRONT_IMG" property="idFrontImg" jdbcType="VARCHAR" />
+		    <result column="ID_BACK_IMG" property="idBackImg" jdbcType="VARCHAR" />
+		    <result column="ID_PORTRAIT_IMG" property="idPortraitImg" jdbcType="VARCHAR" />
+		    <result column="ID_SHOOT_MV" property="idShootMv" jdbcType="VARCHAR" />
+		    <result column="GRADUATE_SCHOOL" property="graduateSchool" jdbcType="VARCHAR" />
+		    <result column="SCHOOL_YEAR" property="schoolYear" jdbcType="VARCHAR" />
+		    <result column="FACULTY" property="faculty" jdbcType="VARCHAR" />
+		    <result column="EDUCATION" property="education" jdbcType="VARCHAR" />
+		    <result column="NETWORK_ID_IMG" property="networkIdImg" jdbcType="VARCHAR" />
+		    <result column="SID_PORTRAIT_IMG" property="sidPortraitImg" jdbcType="VARCHAR" />
+		    <result column="HEAD_IMG" property="headImg" jdbcType="VARCHAR" />
+		    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+		    <result column="QQ" property="qq" jdbcType="VARCHAR" />
+		    <result column="WECHAT" property="wechat" jdbcType="VARCHAR" />
+		    <result column="U_COMMENT" property="comment" jdbcType="VARCHAR" />
+		    <result column="REAL_LEVEL" property="realLevel" jdbcType="VARCHAR" />
+		    <result column="U_LEVEL" property="level" jdbcType="VARCHAR" />
+		    <result column="U_TYPE" property="type" jdbcType="VARCHAR" />
+		    <result column="U_STATE" property="state" jdbcType="VARCHAR" />
+		    <result column="U_CREATEDATE" property="createdate" jdbcType="TIMESTAMP" />
+		    <result column="U_ISDEL" property="isdel" jdbcType="VARCHAR" />
+		</association>
+	</resultMap>
+	<resultMap type="ApplyInfo" id="applyAndUserAndSLMap" extends="applyAndUserInfoMap">
+		<association property="settlementInfoLog" javaType="SettlementInfoLog">
+			<id property="id" column="SL_ID" jdbcType="VARCHAR" />
+	   		<result property="settlementId" column="SETTLEMENT_ID" jdbcType="VARCHAR" />
+	   		<result property="applyId" column="SL_APPLY_ID" jdbcType="VARCHAR" />
+	   		<result property="advancePay" column="ADVANCE_PAY" jdbcType="DECIMAL" />
+	   		<result property="accountPay" column="ACCOUNT_PAY" jdbcType="DECIMAL" />
+   		</association>
+	</resultMap>
+	
+	
+	
+	<resultMap type="com.zhl.job.pojo.ApplyInfoVo" id="applyMapVo">
+		<result property="userId" column="user_id" jdbcType="VARCHAR" />
+		<result property="applyWorkDate" column="APPLY_WORK_DATE" jdbcType="TIMESTAMP" />
+		<result property="employ" column="EMPLOY" jdbcType="VARCHAR" />
+		<result property="realname" column="REALNAME" jdbcType="TIMESTAMP" />
+		<result property="workTitle" column="WORK_TITLE" jdbcType="VARCHAR"/>
+		<result property="workDetail" column="WORK_DETAIL" jdbcType="VARCHAR" />
+		<result property="workMeal" column="WORK_MEAL" jdbcType="VARCHAR" />
+		<result property="addressDetail" column="ADDRESS_DETAIL" jdbcType="VARCHAR" />
+		<result property="jobType" column="JOB_TYPE" jdbcType="VARCHAR" />
+		<result property="state" column="STATE"  jdbcType="VARCHAR"/>
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID,USER_ID,P_ID,WORK_ID,APPLY_DETAIL,APPLY_WORK_DATE,
+        APPLY_WORK_TIME,APP_COMMENT,EMPLOY,TYPE,STATE,CREATEDATE,ISDEL
+	</sql>
+	
+	<sql id="Base_Column_Work_List">
+		ap.ID,ap.USER_ID,ap.P_ID,ap.WORK_ID,ap.APPLY_DETAIL,ap.APPLY_WORK_DATE,
+        ap.APPLY_WORK_TIME,ap.APP_COMMENT,ap.EMPLOY,ap.TYPE,ap.STATE,ap.CREATEDATE,ap.ISDEL,
+        wi.ID as W_ID, wi.USER_ID as W_USER_ID, wi.C_ID, wi.WORK_TITLE, wi.WORK_DETAIL, wi.JOB_NAME,
+		wi.JOB_TYPE, wi.REQUIRE, wi.SEX_REQUIRE, wi.WORK_MEAL, wi.PROVINCE, wi.CITY, wi.CITY_NAME, wi.AREA, wi.AREA_NAME, 
+		wi.ADDRESS_DETAIL, wi.RELEASE_START_DATE, wi.APPLY_END_DATE, wi.WORK_START_DATE, 
+		wi.WORK_END_DATE, wi.WORK_TIME, wi.ALLOW_CHOOSE_DATE, wi.WORK_HOUR, wi.PEOPLE_NUM, wi.BALANCE_TYPE, wi.MONEY, wi.MONEY_TYPE,
+		wi.WORKDAY_NUM, wi.CONTACTS, wi.CONTACTS_MOBILE, wi.CONTACTS_EMAIL, wi.AGREEMENT, wi.LONGITUDE,  wi.LATITUDE, 
+		wi.RELEASE_TYPE, wi.TYPE as W_TYPE, wi.STATE as W_STATE, wi.CREATEDATE as W_CREATEDATE, wi.INTERVIEW, wi.APPLY_SWITCH, wi.ISDEL as W_ISDEL
+	</sql>
+	<sql id="Base_Column_Work_all_company_List">
+		ap.ID,ap.USER_ID,ap.P_ID,ap.WORK_ID,ap.APPLY_DETAIL,ap.APPLY_WORK_DATE,
+        ap.APPLY_WORK_TIME,ap.APP_COMMENT,ap.EMPLOY,ap.TYPE,ap.STATE,ap.CREATEDATE,ap.ISDEL,
+        wi.ID as W_ID, wi.USER_ID as W_USER_ID, wi.C_ID, wi.WORK_TITLE, wi.WORK_DETAIL, wi.JOB_NAME,
+		wi.JOB_TYPE, wi.REQUIRE, wi.SEX_REQUIRE, wi.WORK_MEAL, wi.PROVINCE, wi.CITY, wi.CITY_NAME, wi.AREA, wi.AREA_NAME, 
+		wi.ADDRESS_DETAIL, wi.RELEASE_START_DATE, wi.APPLY_END_DATE, wi.WORK_START_DATE, 
+		wi.WORK_END_DATE, wi.WORK_TIME, wi.ALLOW_CHOOSE_DATE, wi.WORK_HOUR, wi.PEOPLE_NUM, wi.BALANCE_TYPE, wi.MONEY, wi.MONEY_TYPE,
+		wi.WORKDAY_NUM, wi.CONTACTS, wi.CONTACTS_MOBILE, wi.CONTACTS_EMAIL, wi.AGREEMENT, wi.LONGITUDE,  wi.LATITUDE, 
+		wi.RELEASE_TYPE, wi.TYPE as W_TYPE, wi.STATE as W_STATE, wi.CREATEDATE as W_CREATEDATE, wi.INTERVIEW, wi.APPLY_SWITCH, wi.ISDEL as W_ISDEL,
+		ws.ID as WS_ID, ws.WORK_ID as WS_WORK_ID, ws.LOAD_NUM, ws.APPLY_NUM, ws.COMMENT_NUM, ws.ATTENTION_NUM, ws.EMPLOY_NUM,
+		ws.TYPE as WS_TYPE, ws.STATE as WS_STATE, ws.CREATEDATE as WS_CREATEDATE, ws.ISDEL as WS_ISDEL,
+		ci.COMPANY_NAME, ci.LOGO_IMG, ci.COMPANY_TYPE, ci.COMPANY_PEOPLE_NUM, ci.COMPANY_DETAIL
+	</sql>
+	<sql id="Base_Column_User_List">
+		ap.ID,ap.USER_ID,ap.P_ID,ap.WORK_ID,ap.APPLY_DETAIL,ap.APPLY_WORK_DATE,
+        ap.APPLY_WORK_TIME,ap.APP_COMMENT,ap.EMPLOY,ap.TYPE,ap.STATE,ap.CREATEDATE,ap.ISDEL,
+        ui.P_ID as U_P_ID, ui.USER_ID as U_USER_ID, ui.MOBILE, ui.REALNAME, ui.SEX, ui.ID_TYPE,
+        ui.ID_NUMBER, ui.LIVE_PROVINCE, ui.LIVE_CITY, ui.LIVE_AREA, ui.EDUCATION_STATE, 
+        ui.ID_FRONT_IMG, ui.ID_BACK_IMG, ui.ID_PORTRAIT_IMG, ui.ID_SHOOT_MV, ui.GRADUATE_SCHOOL,
+        ui.SCHOOL_YEAR, ui.FACULTY, ui.EDUCATION, ui.NETWORK_ID_IMG, ui.SID_PORTRAIT_IMG, 
+        ui.HEAD_IMG, ui.EMAIL, ui.QQ, ui.WECHAT, ui.U_COMMENT, ui.REAL_LEVEL, ui.U_LEVEL, 
+        ui.TYPE as U_TYPE, ui.STATE as U_STATE, ui.CREATEDATE as U_CREATEDATE, ui.ISDEL as U_ISDEL 
+	</sql>
+	<sql id="Base_Column_User_sl_List">
+		ap.ID,ap.USER_ID,ap.P_ID,ap.WORK_ID,ap.APPLY_DETAIL,ap.APPLY_WORK_DATE,
+        ap.APPLY_WORK_TIME,ap.APP_COMMENT,ap.EMPLOY,ap.TYPE,ap.STATE,ap.CREATEDATE,ap.ISDEL,
+        ui.P_ID as U_P_ID, ui.USER_ID as U_USER_ID, ui.MOBILE, ui.REALNAME, ui.SEX, ui.ID_TYPE,
+        ui.ID_NUMBER, ui.LIVE_PROVINCE, ui.LIVE_CITY, ui.LIVE_AREA, ui.EDUCATION_STATE, 
+        ui.ID_FRONT_IMG, ui.ID_BACK_IMG, ui.ID_PORTRAIT_IMG, ui.ID_SHOOT_MV, ui.GRADUATE_SCHOOL,
+        ui.SCHOOL_YEAR, ui.FACULTY, ui.EDUCATION, ui.NETWORK_ID_IMG, ui.SID_PORTRAIT_IMG, 
+        ui.HEAD_IMG, ui.EMAIL, ui.QQ, ui.WECHAT, ui.U_COMMENT, ui.REAL_LEVEL, ui.U_LEVEL, 
+        ui.TYPE as U_TYPE, ui.STATE as U_STATE, ui.CREATEDATE as U_CREATEDATE, ui.ISDEL as U_ISDEL,
+        sl.id as sl_id,  sl.settlement_id, sl.apply_id as sl_apply_id, sl.advance_pay, sl.account_pay
+	</sql>
+	
+	<!-- 标记为未删除的 -->
+	<sql id="Base_Column_isdel">
+		 and ap.ISDEL = '00'
+	</sql>
+	
+	<select id="queryByApplyId" parameterType="map" resultMap="applyMap">
+		select
+		<include refid="Base_Column_List"/>
+		from applyinfo where ID=#{id} and USER_ID=#{userId} and P_ID=#{pid}
+	</select>
+	
+	<select id="selectPaging" parameterType="map" resultMap="applyMap">
+		select 
+		<include refid="Base_Column_List"/> 
+		from applyinfo
+	</select>
+	
+	<select id="queryByApplyWorkId" parameterType="map" resultMap="applyMap">
+		select
+		<include refid="Base_Column_List"/>
+		from applyInfo m where WORK_ID=#{workId}
+	</select>
+	
+	<select id="queryByEmployAndWorkDay" parameterType="map" resultMap="applyMap">
+		select
+		<include refid="Base_Column_List"/>
+		from applyInfo ap 
+		<where>
+			ap.APPLY_WORK_DATE = #{applyWorkDate} and ap.EMPLOY = #{employ}
+			<include refid="Base_Column_isdel"/>
+		</where>
+	</select>
+	
+	<!-- 按条件查询申请信息 -->
+	<select id="queryWorkInfoBycondition" parameterType="map" resultMap="applyMap">
+		select
+		<include refid="Base_Column_List"/>
+		from applyinfo ap 
+		<where>
+			<if test="id != null and id != ''">
+				and ap.ID = #{id} 
+			</if>
+			<if test="userId != null and userId != ''">
+				and ap.USER_ID = #{userId} 
+			</if>
+			<if test="pid != null and pid != ''">
+				and ap.P_ID = #{pid} 
+			</if>
+			<if test="workId != null and workId != ''">
+				and ap.WORK_ID = #{workId} 
+			</if>
+			<if test="applyDetail != null and applyDetail != ''">
+				and ap.APPLY_DETAIL = #{applyDetail} 
+			</if>
+			<if test="applyWorkDate != null and applyWorkDate != ''">
+				and ap.APPLY_WORK_DATE = #{applyWorkDate} 
+			</if>
+			<if test="applyWorkTime != null and applyWorkTime != ''">
+				and ap.APPLY_WORK_TIME = #{applyWorkTime} 
+			</if>
+			<if test="appComment != null and appComment != ''">
+				and ap.APP_COMMENT = #{appComment} 
+			</if>
+			<if test="employ != null and employ != ''">
+				and ap.EMPLOY = #{employ} 
+			</if>
+			<if test="type != null and type != ''">
+				and ap.TYPE = #{type} 
+			</if>
+			<if test="state != null and state != ''">
+				and ap.STATE = #{state} 
+			</if>
+			<if test="createdate != null and createdate != ''">
+				and ap.CREATEDATE = #{createdate} 
+			</if>
+			<include refid="Base_Column_isdel"/>
+		</where>
+	</select>
+	
+	<!-- 根据录用状态查询指定招聘中录用情况 -->
+	<select id="queryByEmployAndWorkId" parameterType="map" resultMap="applyMap">
+		select
+		<include refid="Base_Column_List"/>
+		from applyinfo ap 
+		<where>
+			ap.WORK_ID = #{workId} and ap.EMPLOY = #{employ}
+			<include refid="Base_Column_isdel"/>
+		</where>
+	</select>
+	
+	<!-- 查询当前用户是否报名 -->
+	<select id="queryIsEmploy" parameterType="map" resultMap="applyMap">
+		select
+		<include refid="Base_Column_List"/>
+		from applyinfo ap 
+		<where>
+			ap.USER_ID = #{userId} and ap.P_ID = #{pid} and ap.WORK_ID = #{workId} 
+			<if test="employ != null and employ != ''">
+				and ap.EMPLOY = #{employ}
+			</if>
+			<include refid="Base_Column_isdel"/>
+		</where>
+	</select>
+	
+	<!-- 分页查询该用户下所有申请（按状态区分） -->
+	<select id="queryApplyAndWorkPageByEmploy" parameterType="map" resultMap="workAndCompanyMap">
+		select 
+		<include refid="Base_Column_Work_all_company_List"/> 
+		from applyinfo ap, workinfo wi, workinfo_statis ws, companyinfo ci  
+		<where>
+			ap.WORK_ID = wi.ID and ap.WORK_ID=ws.WORK_ID and wi.C_ID = ci.C_ID
+			<if test="employ != null and employ != ''">
+				and ap.EMPLOY = #{employ} 
+			</if>
+			<if test="state != null and state != ''">
+				and ap.STATE = #{state} 
+			</if>
+			<if test="userId != null and userId != ''">
+				and ap.USER_ID = #{userId} 
+			</if>
+			<if test="pid != null and pid != ''">
+				and ap.P_ID = #{pid} 
+			</if>
+			<include refid="Base_Column_isdel"/>
+			order by ap.CREATEDATE desc
+		</where>
+	</select>
+	
+	<!-- 查询用户指定日期是否已申请过工作 -->
+	<select id="queryWorkInfoByDate" parameterType="map" resultMap="applyMap">
+		select
+		<include refid="Base_Column_List"/>
+		from applyInfo ap 
+		<where>
+			<if test="userId != null and userId != ''">
+				and ap.USER_ID = #{userId} 
+			</if>
+			<if test="pid != null and pid != ''">
+				and ap.P_ID = #{pid} 
+			</if>
+			and ap.APPLY_WORK_DATE = #{applyWorkDate} and ap.EMPLOY in ('00'，'01')
+			<include refid="Base_Column_isdel"/>
+		</where>
+	</select>
+	<!-- 查询用户指定日期是否已申请过这个工作并根据状态 -->
+	<select id="queryWorkInfoByDateAndWorkId" parameterType="map" resultMap="applyMap">
+		select
+		<include refid="Base_Column_List"/>
+		from applyInfo ap 
+		<where>
+			<if test="userId != null and userId != ''">
+				and ap.USER_ID = #{userId} 
+			</if>
+			<if test="pid != null and pid != ''">
+				and ap.P_ID = #{pid} 
+			</if>
+			<if test="workId != null and workId != ''">
+				and ap.WORK_ID = #{workId} 
+			</if>
+			and ap.APPLY_WORK_DATE = #{applyWorkDate} and ap.EMPLOY in ('02')
+			<include refid="Base_Column_isdel"/>
+		</where>
+	</select>
+	
+	<!--  -->
+	<select id="queryApplyByWorkAndDate" parameterType="map" resultMap="applyAndUserInfoMap">
+		select 
+		<include refid="Base_Column_User_List"/> 
+		from applyinfo ap, userinfo ui
+		<where>
+			ap.P_ID = ui.P_ID
+			<if test="workId != null and workId != ''">
+				 and ap.WORK_ID = #{workId}
+			</if>
+			<if test="applyWorkDate != null and applyWorkDate != ''">
+				 and ap.APPLY_WORK_DATE = #{applyWorkDate}
+			</if>
+			and ap.EMPLOY in ('00'，'01'，'02'，'03')
+		</where>
+	</select>
+	
+	<!-- 企业管理查询只查询已录用和进行中 -->
+	<select id="queryApplyByWorkAndDateNotPage" parameterType="map" resultMap="applyAndUserAndSLMap">
+		select 
+		<include refid="Base_Column_User_sl_List"/>
+		from applyinfo ap, userinfo ui, settlementinfo_log sl
+		<where>
+			ap.P_ID = ui.P_ID and ap.ID = sl.APPLY_ID
+			<if test="workId != null and workId != ''">
+				 and ap.WORK_ID = #{workId}
+			</if>
+			<if test="applyWorkDate != null and applyWorkDate != ''">
+				 and ap.APPLY_WORK_DATE = #{applyWorkDate}
+			</if>
+			and ap.EMPLOY = '01'
+		</where>
+	</select>
+	<!-- 查询此用户是否参加过此类型的工作 -->
+	<select id="queryOldJobType" parameterType="map" resultMap="applyAndWorkAllMap">
+		select 
+		<include refid="Base_Column_Work_List"/>
+		from applyinfo ap, workinfo wi
+		<where>
+			ap.WORK_ID = wi.ID 
+			and ap.P_ID = #{pid} and wi.JOB_TYPE = #{jobType} and ap.STATE = #{state}
+		</where>
+	</select>
+	
+	
+	
+	<!-- 写入 -->
+	<insert id="insertApplyInfos" parameterType="java.util.List" useGeneratedKeys="false">
+        insert into applyinfo (
+        <include refid="Base_Column_List"/>
+        )
+        <foreach collection="list" item="item" index="index" separator="union all">
+            (select 
+            #{item.id},#{item.userId},#{item.pid},
+            #{item.workId},#{item.applyDetail},#{item.applyWorkDate},
+            #{item.applyWorkTime},#{item.appComment},#{item.employ},
+            #{item.type},#{item.state},#{item.createdate},#{item.isdel} 
+			from dual)
+        </foreach>
+    </insert>
+    
+    <update id="batchUpdateApplyInfos"  parameterType="java.util.List">
+	   <foreach collection="list" item="item" index="index" open="begin" close=";end;" separator=";">
+	   		update applyinfo 
+			<set>
+				<if test="item.employ!=null and item.employ!=''">
+					EMPLOY=#{item.employ},
+				</if>
+			  	<if test="item.state!=null and item.state!=''">
+					STATE=#{item.state}
+				</if>
+			</set>
+			where ID = #{item.id}
+	   </foreach>
+    </update>
+	
+    
+    <update id="updateApplyInfo" parameterType="ApplyInfo" >
+		update applyinfo
+		<trim prefix="set" suffixOverrides=",">
+			<if test="state != null and state != ''">
+				STATE = #{state},
+			</if>
+			<if test="type != null and type != ''">
+				TYPE = #{type},
+			</if>
+			<if test="appComment != null and appComment != ''">
+				APP_COMMENT = #{appComment},
+			</if>
+			<if test="applyWorkTime != null and applyWorkTime != ''">
+				APPLY_WORK_TIME = #{applyWorkTime},
+			</if>
+			<if test="applyWorkDate != null and applyWorkDate != ''">
+				APPLY_WORK_DATE = #{applyWorkDate},
+			</if>
+			<if test="applyDetail != null and applyDetail != ''">
+				APPLY_DETAIL = #{applyDetail},
+			</if>
+			<if test="employ != null and employ != ''">
+				EMPLOY = #{employ},
+			</if>
+			<if test="isdel != null and isdel != ''">
+				ISDEL = #{isdel},
+			</if>
+		</trim>
+		<where>
+			<if test="id != null and id != ''">
+				and ID = #{id}
+			</if>
+		</where>
+	</update>
+    
+    <update id="delApplyInfos" >
+		update applyinfo set ISDEL=01
+		where ID IN
+        <foreach collection="ids" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+	</update>
+	
+    <select id="queryApplyInfoPage" parameterType="map" resultMap="applyMapVo">
+		select a.USER_ID,a.APPLY_WORK_DATE,a.EMPLOY,u.REALNAME,w.WORK_TITLE,
+		w.WORK_DETAIL,w.WORK_MEAL,w.ADDRESS_DETAIL ,w.JOB_TYPE,a.STATE
+		from applyinfo a,userinfo u,workinfo w
+		where a.USER_ID=u.USER_ID and a.WORK_ID=w.ID and a.ISDEL='00' and u.ISDEL='00' and w.ISDEL='00' 
+		<if test="state != null">and STATE = #{state}</if>
+		order by a.CREATEDATE desc
+	</select>
+	
+</mapper>

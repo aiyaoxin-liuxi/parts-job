@@ -1,0 +1,175 @@
+@charset "utf-8";html{color:#000;background:#fff;overflow-y:scroll;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}html *{outline:0;-webkit-text-size-adjust:none;-webkit-tap-highlight-color:rgba(0,0,0,0)}html,body{font-family:sans-serif}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{margin:0;padding:0}input,select,textarea{font-size:100%}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}abbr,acronym{border:0;font-variant:normal}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:500}ol,ul{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:500}q:before,q:after{content:''}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a:hover{text-decoration:underline}ins,a{text-decoration:none}
+@media screen and (min-width:640px){
+    html{
+        font-size: 64px;
+    }
+}
+@media screen and (min-width: 320px){
+    html{
+        font-size: 32px;
+    }
+}
+@media screen and (min-width: 360px){
+    html{
+        font-size: 36px;
+    }
+}
+@media screen and (min-width: 375px){
+    html{
+        font-size: 37.5px;
+    }
+}
+@media screen and (min-width: 414px){
+    html{
+        font-size: 41.4px;
+    }
+}
+ul,li{
+    list-style: none;
+}
+html,body{
+    width: 100%;
+    height:100%;
+    font-family: Microsoft Yahei, arial;
+	background-color: #f6f5f9;
+}
+.clear{clear:both; height: 0; line-height: 0; font-size: 0}
+header{
+    width:100%;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    font-size: 0.5rem;
+    position: absolute;
+    top:0;
+    left:0;
+    background: #0080ff;
+    font-family: Microsoft Yahei, arial;
+}
+header span{
+    display: block;
+    position: absolute;
+    float: left;
+    font-size: 0.4rem;
+}
+header span.goTo{
+    left: 0.6rem;
+}
+header a{
+    color: #fff;
+    text-decoration:none;
+}
+header span.goTo:before{
+    display: block;
+    content: "";
+    width: 0.25rem;
+    height: 0.25rem;
+    border-left: 2px solid #fff;
+    border-top: 2px solid #fff;
+    -webkit-transform: rotate(-45deg);
+    position: absolute;
+    left: -0.3rem;
+    top: 0.6rem;
+}
+section .logo {
+    width: 100%;
+	height:5.8rem;
+    background-color: #0080ff;
+}
+section .logo img{
+    position: absolute;
+    top: 1.4rem;
+	left:50%;
+    width: 9.99rem;
+    height: 4.4rem;
+	transform:translateX(-50%)
+}
+.C-1{
+    background: #f6f5f9;
+    width: 100%;
+}
+.con-1{
+    top: 6rem;
+    padding: 0 0.35rem;
+    font-size: 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+.con-1 li{
+    width: 100%;
+	padding:0.5rem 0;
+	border-bottom:1px solid #ddd;
+    height: 0.5rem;
+    position: relative;
+}
+.con-1 li label{
+	width:25%;
+	display:inline-block;
+}
+.con-1 li:last-child{
+	padding:0.3rem 0 0.25rem 0;
+}
+.con-1 li:last-child label{
+	width:100%;
+	color:#a0a0a0;
+	font-size:0.4rem;
+}
+.con-1 li:last-child p{
+	padding: 0.3rem 0 0.16rem 0;
+    box-sizing: border-box;
+	    border-bottom: 1px  solid #ddd
+}
+.con-1 li:last-child p span{
+	display:inline-block;
+	width:16.39%;
+	border-right:1px  solid #ddd;
+	height:1rem;
+	line-height:1rem;
+	text-align:center;
+}
+.con-1 li:last-child p span:last-child{
+	border-right:0
+}
+.con-1 li span{
+	width:71%;
+	text-align: right;
+	display:inline-block;
+	color:#a0a0a0;
+}
+.con-1 li input{
+    position: absolute;
+    top: 0.35rem;
+    right: 0.55rem;
+    height: 0.6rem;
+    width: 5rem;
+    display: inline-block;
+    -webkit-appearance: none;
+    border: 1px solid #444;
+}
+.button{
+	width:100%;
+	padding:0 0.35rem;
+	box-sizing:border-box;
+	margin-top:4rem;
+}
+.button a{
+	display:block;
+	width:100%;
+	height:1.5rem;
+	line-height:1.5rem;
+	border-radius:5px;
+	background-color:#0080ff;
+	margin:0 auto;
+	margin-bottom:0.5rem;
+	text-align:center;
+	font-size:0.6rem;
+	color:#fff;
+}
+.button a:last-child{
+	background-color:#ddd;
+}
+.C-1 .tell{
+    /*display: inline-block;*/
+    text-align: center;
+    font-size: 0.05rem;
+}

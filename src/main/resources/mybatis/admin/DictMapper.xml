@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhl.job.dao.IDictDao">
+
+<resultMap id="DictMapper" type="com.zhl.job.pojo.Dict" >
+	    <id column="ID" property="did" jdbcType="VARCHAR" />
+	    <result column="DKEY" property="dkey" jdbcType="VARCHAR" />
+	    <result column="DVALUE" property="dvalue" jdbcType="VARCHAR" />
+	    <result column="DORDER" property="dorder" jdbcType="VARCHAR" />
+	    <result column="DGROUP" property="dgroup" jdbcType="VARCHAR" />
+	    <result column="RSV1" property="rsv1" jdbcType="VARCHAR" />
+	    <result column="RSV2" property="rsv2" jdbcType="VARCHAR" />
+	    <result column="STATE" property="state" jdbcType="VARCHAR" />
+	    <result column="TYPE" property="dtype" jdbcType="VARCHAR" />
+	    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+	    <result column="CREATEDATE" property="createDate" jdbcType="TIMESTAMP" />
+	    <result column="ISDEL" property="isdel" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<insert id="insertOne" parameterType="com.zhl.job.pojo.Dict" >
+	    INSERT INTO DICTIONARY  ( ID
+			<if test="dkey != null">,DKEY</if>
+			<if test="dvalue != null">,DVALUE</if>
+			<if test="dorder != null">,DORDER</if>
+			<if test="dgroup != null">,DGROUP</if>
+			<if test="rsv1 != null">,RSV1</if>
+			<if test="rsv2 != null">,RSV2</if>
+			<if test="state != null">,STATE</if>
+			<if test="dtype != null">,TYPE</if>
+			<if test="remark != null">,REMARK</if>
+			<if test="createDate != null">,CREATEDATE</if>
+			<if test="isdel != null">,ISDEL</if>
+			 )
+			 VALUES( #{did}
+			 <if test="dkey != null">,#{dkey}</if>
+			<if test="dvalue != null">,#{dvalue}</if>
+			<if test="dorder != null">,#{dorder}</if>
+			<if test="dgroup != null">,#{dgroup}</if>
+			<if test="rsv1 != null">,#{rsv1}</if>
+			<if test="rsv2 != null">,#{rsv2}</if>
+			<if test="state != null">,#{state}</if>
+			<if test="dtype != null">,#{dtype}</if>
+			<if test="remark != null">,#{remark}</if>
+			<if test="createDate != null">,#{createDate}</if>
+			<if test="isdel != null">,#{isdel}</if>
+			  )
+	</insert>
+	
+	<update  id="deleteOne"  parameterType="com.zhl.job.pojo.Dict" >
+		update DICTIONARY set ISDEL = '01' where ID = #{did} 
+	</update>
+	
+	<select id="findAll" resultMap="DictMapper"  >
+		select * from DICTIONARY where ISDEL = '00' order by DORDER desc, CREATEDATE desc ,ID desc
+	</select>
+	<!-- dictDb -->
+	<select id="findById" resultMap="DictMapper" parameterType="com.zhl.job.pojo.Dict" >
+		select * from DICTIONARY where ISDEL = '00'  and ID = #{did} 
+	</select>
+	
+<!--
+	int updateOneById(Dict dict);
+	 -->
+	<update id="updateOneById"  parameterType="com.zhl.job.pojo.Dict">
+		update DICTIONARY set
+		     DKEY = #{dkey}
+			<if test="dvalue != null">,DVALUE=#{dvalue}</if>
+			<if test="dorder != null">,DORDER=#{dorder}</if>
+			<if test="dgroup != null">,DGROUP=#{dgroup}</if>
+			
+			<if test="rsv1 != null">,RSV1=#{rsv1}</if>
+			<if test="rsv2 != null">,RSV2=#{rsv2}</if>
+			<if test="state != null">,STATE=#{state}</if>
+			<if test="dtype != null">,TYPE=#{dtype}</if>
+			<if test="remark != null">,REMARK=#{remark}</if>
+			<if test="createDate != null">,CREATEDATE=#{createDate}</if>
+			<if test="isdel != null">,ISDEL=#{isdel}</if>
+			
+		where ID = #{did} 
+	</update>
+	
+</mapper>

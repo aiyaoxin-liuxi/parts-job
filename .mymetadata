@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="parts-job"
+  id="myeclipse.1476430516565"
+  context-root="/parts-job"
+  j2ee-spec="1.7"
+  archive="parts-job.war">
+  <attributes>
+    <attribute name="webrootdir" value="webapp" />
+  </attributes>
+</project-module>
+

@@ -1,0 +1,213 @@
+@charset "utf-8";html{color:#000;background:#fff;overflow-y:scroll;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%}html *{outline:0;-webkit-text-size-adjust:none;-webkit-tap-highlight-color:rgba(0,0,0,0)}html,body{font-family:sans-serif}body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td,hr,button,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{margin:0;padding:0}input,select,textarea{font-size:100%}table{border-collapse:collapse;border-spacing:0}fieldset,img{border:0}abbr,acronym{border:0;font-variant:normal}del{text-decoration:line-through}address,caption,cite,code,dfn,em,th,var{font-style:normal;font-weight:500}ol,ul{list-style:none}caption,th{text-align:left}h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:500}q:before,q:after{content:''}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sup{top:-.5em}sub{bottom:-.25em}a:hover{text-decoration:underline}ins,a{text-decoration:none}
+@media screen and (min-width:640px){
+    html{
+        font-size: 64px;
+    }
+}
+@media screen and (min-width: 320px){
+    html{
+        font-size: 32px;
+    }
+}
+@media screen and (min-width: 360px){
+    html{
+        font-size: 36px;
+    }
+}
+@media screen and (min-width: 375px){
+    html{
+        font-size: 37.5px;
+    }
+}
+@media screen and (min-width: 414px){
+    html{
+        font-size: 41.4px;
+    }
+}
+ul,li{
+    list-style: none;
+}
+html,body{
+    width: 100%;
+    height:100%;
+    /*background: #f0f0f0;*/
+    /*overflow: hidden;*/
+    font-family: Microsoft Yahei, arial;
+}
+.clear{clear:both; height: 0; line-height: 0; font-size: 0}
+header{
+    width:100%;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    text-align: center;
+    font-size: 0.5rem;
+    position: absolute;
+    top:0;
+    left:0;
+    background: #000;
+    font-family: Microsoft Yahei, arial;
+}
+header span{
+    display: block;
+    position: absolute;
+    float: left;
+    font-size: 0.4rem;
+}
+header span.goTo{
+    left: 0.5rem;
+}
+header span.goTo a{
+    color: #fff;
+    text-decoration:none;
+}
+header span.goTo:before{
+    display: block;
+    content: "";
+    width: 0.25rem;
+    height: 0.25rem;
+    border-left: 2px solid #fff;
+    border-top: 2px solid #fff;
+    -webkit-transform: rotate(-45deg);
+    position: absolute;
+    left: -0.3rem;
+    top: 0.6rem;
+}
+.contain{
+    position: absolute;
+    top: 1.8rem;
+    /*width: 100%;*/
+    margin: 0 0.35rem;
+    /*overflow: auto;/!* 去掉这一句*!/*/
+    /*bottom: 0;     /!**!/*/
+}
+/*.contain .section1{*/
+    /*box-sizing: border-box;*/
+/*}*/
+.contain .section1{
+    width: 100%;
+    position: relative;
+    font-size: 0.5rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.contain .section1 h3{
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+.section1 ul{
+    position: relative;
+    top:0.3rem;
+    width: 100%;
+}
+.contain .section1 ul li{
+    float: left;
+    font-size: 0.2rem;
+    margin-right: 0.6rem;
+}
+.contain .section2{
+    width: 100%;
+    position: relative;
+    top:1.3rem;
+    font-size: 0.4rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.contain .section2 .article{
+    text-indent: 0.8rem;
+    font-size: 0.45rem;
+    padding: 0.3rem;
+    border: 0.05rem dashed #000;
+    clear: both;
+}
+.contain .section2 .question{
+    position: relative;
+    top:0.8rem;
+}
+.contain .section2 .question h5{
+    font-size: 0.45rem;
+    font-weight: bold;
+}
+.contain .section2 .question b{
+    height: 2rem;
+    display: block;
+    line-height: 2rem;
+    text-align: center;
+    font-size: 0.5rem;
+}
+.contain .section3{
+    padding: 0 0.6rem;
+    box-sizing: border-box;
+    width: 100%;
+    height: 11rem;
+    margin-top: 1.5rem;
+}
+.contain .section3 ul li img{
+    width: 3.5rem;
+    height: 3rem;
+}
+.contain .section3 .left{
+    float: left;
+}
+.contain .section3 .left li{
+    margin-top: 0.5rem;
+}
+.contain .section3 .right{
+    float: right;
+}
+.contain .section3 .right li{
+    margin-top: 1.67rem;
+}
+.contain .section4{
+    /*margin-top: 1.8rem;*/
+    position: relative;
+    height: 10rem;
+    font-size: 0.4rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.contain .section4 .right1{
+    float: right;
+}
+.contain .section4 .left1{
+    position: absolute;
+    top: 1.0rem;
+    width: 100%;
+    font-size: 0.8rem;
+    font-weight: bold;
+    text-align: center;
+}
+.contain .section4 ul{
+    padding: 0 0.3rem;
+    box-sizing: border-box;
+    width: 100%;
+    margin-top: 0.8rem;
+    height: 4rem;
+}
+.contain .section4 ul .first{
+    float: left;
+    margin-top: 1.9rem;
+}
+.contain .section4 ul li img{
+    width: 4rem;
+    height: 4rem;
+}
+.contain .section4 ul .last{
+    float: right;
+    margin-top: 1.9rem;
+}
+.contain .section4 ul span{
+    display: block;
+    height: 0.5rem;
+    margin-top: 0.6rem;
+    margin-left: 0.5rem;
+}
+/******中奖规则******/
+.ruleContain{
+    width: 100%;
+    font-size: 0.4rem;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    padding: 0.5rem;
+    box-sizing: border-box;
+}
+.ruleContain h3{
+    margin: 0.3rem 0;
+    font-size: 0.45rem;
+    font-weight: bold;
+}

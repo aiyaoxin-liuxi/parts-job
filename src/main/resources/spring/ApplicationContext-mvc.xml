@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd	
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+	
+	<mvc:annotation-driven/>
+	<mvc:default-servlet-handler/>
+	<!-- <context:component-scan base-package="com.zhl.job.*" /> -->
+	<context:component-scan base-package="com.zhl.job.*">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+	</context:component-scan> 
+
+	<!-- 对静态资源文件的访问  restful-->
+	<mvc:resources mapping="/static/**" location="/static/" />
+
+	<!-- 配置SpringMVC的视图解析器 -->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/"/>
+		<property name="suffix" value=".jsp"/>
+	</bean>
+	
+	<bean id="exceptionResolver" class="com.zhl.job.resovlver.MyExceptionResolver"></bean>
+	<!-- 上传拦截，如最大上传值及最小上传值 -->
+	<bean id="multipartResolver"   class="org.springframework.web.multipart.commons.CommonsMultipartResolver" >   
+		<property name="maxUploadSize">    
+			<value>104857600</value>    
+		</property>   
+		<property name="maxInMemorySize">    
+			<value>4096</value>    
+		</property>
+		<property name="defaultEncoding">    
+			<value>utf-8</value>    
+		</property> 
+    </bean>
+    
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" >  
+		<property name="messageConverters">   
+	         <list>   
+	             <bean class = "org.springframework.http.converter.StringHttpMessageConverter">   
+	                <property name = "supportedMediaTypes">
+	                      <list>
+	                          <value>text/html;charset=UTF-8</value>   
+	                     </list>   
+	                </property>   
+	             </bean>   
+	         </list>   
+	   </property>  
+	</bean>  
+	<mvc:interceptors>  
+		<mvc:interceptor>
+			 <mvc:mapping path="/*" />
+			 <mvc:mapping path="/*/*" />
+			 <mvc:mapping path="/*/*/*" />
+    		<bean class="com.zhl.job.interceptor.LoginStatusInterceptor">
+	    		<property name="scanPath">  
+	                    <value>com.zhl.job.controller</value>  
+	            </property>
+	            <property name="scanPath4Sys">  
+	                    <value>com.zhl.job.controller.sys</value>  
+	            </property>
+    		</bean> 
+		</mvc:interceptor>
+    </mvc:interceptors> 
+</beans>

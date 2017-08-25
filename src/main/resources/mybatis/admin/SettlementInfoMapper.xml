@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhl.job.dao.ISettlementInfoDao">
+
+	<resultMap type="SettlementInfo" id="settlementAllMap" >
+		<id property="id" column="ID"/>
+		<result property="cid" column="C_ID"/>
+		<result property="workId" column="WORK_ID"/>
+		<result property="settlementDate" column="SETTLEMENT_DATE"/>
+   		<result property="workDay" column="WORK_DAY"/>
+		<result property="accountTotal" column="ACCOUNT_TOTAL"/>
+		<result property="type" column="TYPE"/>
+		<result property="state" column="STATE"/>
+		<result property="createdate" column="CREATEDATE"/>
+		<result property="isdel" column="ISDEL"/>
+		<collection property="sList" ofType="com.zhl.job.pojo.SettlementInfoLog" column="id">  
+           	<id property="id" column="SL_ID"/>
+    		<result property="settlementId" column="SETTLEMENT_ID"/>
+    		<result property="userId" column="USER_ID"/>
+    		<result property="pid" column="P_ID"/>
+    		<result property="cid" column="SL_C_ID"/>
+    		<result property="workId" column="WORK_ID"/>
+    		<result property="settlementDate" column="SL_SETTLEMENT_DATE"/>
+   			<result property="workDay" column="SL_WORK_DAY"/>
+    		<result property="advancePay" column="ADVANCE_PAY"/>
+    		<result property="accountPay" column="ACCOUNT_PAY"/>
+    		<result property="remark" column="REMARK"/>
+    		<result property="type" column="SL_TYPE"/>
+    		<result property="state" column="SL_STATE"/>
+    		<result property="createdate" column="SL_CREATEDATE"/>
+    		<result property="isdel" column="SL_ISDEL"/>  
+        </collection>  
+	</resultMap>
+	<!-- <resultMap type="SettlementInfo" id="settlementAllMap" extends="settlementMap">
+		<association property="settlementInfoLog" javaType="SettlementInfoLog">
+    		<id property="id" column="sl_id"/>
+    		<result property="settlementId" column="settlement_id"/>
+    		<result property="userId" column="user_id"/>
+    		<result property="pid" column="p_id"/>
+    		<result property="cid" column="sl_c_id"/>
+    		<result property="workId" column="work_id"/>
+    		<result property="settlementDate" column="sl_settlement_date"/>
+   			<result property="workDay" column="sl_work_day"/>
+    		<result property="advancePay" column="advance_pay"/>
+    		<result property="accountPay" column="account_pay"/>
+    		<result property="remark" column="remark"/>
+    		<result property="type" column="sl_type"/>
+    		<result property="state" column="sl_state"/>
+    		<result property="createdate" column="sl_createdate"/>
+    		<result property="isdel" column="sl_isdel"/>
+    	</association>
+	</resultMap> -->
+	
+<!-- 公用sql -->	
+	
+	<sql id="Base_Column_List">
+		ID, C_ID, WORK_ID, SETTLEMENT_DATE, WORK_DAY, ACCOUNT_TOTAL, TYPE, STATE, CREATEDATE, ISDEL
+	</sql>
+	
+	<sql id="Base_Column_List_all">
+		s.ID, s.C_ID, s.WORK_ID, s.SETTLEMENT_DATE, s.WORK_DAY, s.ACCOUNT_TOTAL, s.TYPE, s.STATE, s.CREATEDATE, s.ISDEL, 
+		sl.ID as SL_ID, sl.SETTLEMENT_ID, sl.P_USER_ID, sl.C_USER_ID, sl.P_ID, sl.C_ID as SL_C_ID, sl.WORK_ID,
+		sl.SETTLEMENT_DATE as SL_SETTLEMENT_DATE, sl.WORK_DAY as SL_WORK_DAY,
+		sl.ADVANCE_PAY, sl.ACCOUNT_PAY, sl.REMARK, sl.TYPE as SL_TYPE, sl.STATE as SL_STATE, 
+		sl.CREATEDATE as SL_CREATEDATE, sl.ISDEL as SL_ISDEL
+	</sql>
+	
+	<!-- 标记为未删除的 -->
+	<sql id="Base_Column_isdel">
+		 and ISDEL = '00'
+	</sql>
+	<sql id="Base_Column_isdel_all">
+		 and s.ISDEL = '00'
+	</sql>
+	
+	
+<!-- select -->
+
+	<!-- 根据主键id查询 -->
+	<select id="querySettlementById" parameterType="map" resultMap="settlementAllMap">
+		select 
+		s.*,sl.*
+		from settlementinfo s, settlementinfo_log sl 
+		<where>
+			s.ID = sl.SETTLEMENT_ID and s.ID = #{id}
+			<include refid="Base_Column_isdel_all" /> 
+		</where>
+	</select>
+	
+	<!-- 查询结算表中此兼职工作指定天的结算信息是否存在 -->
+	<select id="querySettlementByWorkIdAndDay" parameterType="map" resultMap="settlementAllMap">
+		select 
+		<include refid="Base_Column_List_all" /> 
+		from settlementinfo s, settlementinfo_log sl 
+		<where>
+			s.ID = sl.SETTLEMENT_ID and 
+			s.WORK_ID = #{workId} and s.WORK_DAY = #{workDay}
+		</where>
+	</select>
+	
+	<!-- 查询招聘下所有结算 -->
+	<select id="querySettlementByWorkId" parameterType="map" resultMap="settlementAllMap">
+		select 
+		<include refid="Base_Column_List" /> 
+		from settlementinfo 
+		<where>
+				WORK_ID = #{workId} 
+			<if test="workDay != null and workDay != ''">
+				and WORK_DAY = #{workDay}
+			</if>
+			<if test="state != null and state != ''">
+				and STATE = #{state}
+			</if>
+			<include refid="Base_Column_isdel" /> 
+		</where>
+	</select>
+	<!-- queryListByCompayId 查询企业下所有结算 -->
+	<select id="queryListByCompayId" parameterType="map" resultMap="settlementAllMap">
+		select	*	from settlementinfo where C_ID = #{cid} and ISDEL = '00' order by  CREATEDATE desc ,ID desc
+	</select>
+	<select id="queryListAll" parameterType="map" resultMap="settlementAllMap">
+			select	*	from settlementinfo where ISDEL = '00' order by  CREATEDATE desc ,ID desc
+	</select>
+	
+<!-- update -->
+	
+	<!-- 修改结算表中实付全部金额（申请时的修改） -->
+	<update id="updateAccountTotal"  parameterType="SettlementInfo">
+		update settlementinfo set ACCOUNT_TOTAL = #{accountTotal}
+		<where>
+			ID = #{id}
+		</where>
+	</update>
+	
+	<!-- 修改结算表中实付全部金额（结算时修改） -->
+	<update id="updateAccountTotalAndState"  parameterType="SettlementInfo">
+		update settlementinfo set ACCOUNT_TOTAL = #{accountTotal}, 
+		WORK_DAY = #{workDay}, STATE = #{state}
+		<where>
+			ID = #{id}
+		</where>
+	</update>
+	
+	
+<!-- insert -->	
+
+	<!-- 写入-->
+ 	<insert id="addSettlementInfo" parameterType="SettlementInfo" useGeneratedKeys="true" keyProperty="id"> 
+ 		insert into settlementinfo 
+ 		(
+ 		<include refid="Base_Column_List" />
+ 		) 
+ 		values 
+ 		(
+			#{id}, #{cid}, #{workId}, #{settlementDate}, #{workDay}, #{accountTotal}, #{type}, #{state}, #{createdate}, #{isdel}
+		)
+	</insert>
+	
+</mapper>

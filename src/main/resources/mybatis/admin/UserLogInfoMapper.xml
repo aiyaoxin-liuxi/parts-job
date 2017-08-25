@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhl.job.dao.IUserLogInfoDao">
+	<resultMap id="UserLogInfo" type="com.zhl.job.pojo.UserLogInfo" >
+	    <id column="ID" property="id" jdbcType="VARCHAR" />
+	    <result column="SUBACCNO_ID" property="subaccnoId" jdbcType="VARCHAR" />
+	    <result column="ACCOUNT_NO" property="accountNo" jdbcType="VARCHAR" />
+	    <result column="MOBILE" property="mobile" jdbcType="VARCHAR" />
+	    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+	    <result column="WECHAT_NAME" property="wechatName" jdbcType="VARCHAR" />
+	    <result column="LOG_PASSWORD" property="logPassword" jdbcType="VARCHAR" />
+	    <result column="USER_TYPE" property="userType" jdbcType="VARCHAR" />
+	    <result column="USER_STATE" property="userState" jdbcType="VARCHAR" />
+	    <result column="LEVEL" property="level" jdbcType="VARCHAR" />
+	    <result column="ID_CHECK_STATE" property="idCheckState" jdbcType="VARCHAR" />
+	    <result column="PAY_PASSWORD" property="payPassword" jdbcType="VARCHAR" />
+	    <result column="ACCOUNT_TYPE" property="accountType" jdbcType="VARCHAR" />
+	    <result column="ACCOUNT_STATE" property="accountState" jdbcType="VARCHAR" />
+	    <result column="FREEZE_STATE" property="freezeState" jdbcType="VARCHAR" />
+	    <result column="TOTAL" property="total" jdbcType="DECIMAL" />
+	    <result column="USE_AMOUNT" property="useAmount" jdbcType="DECIMAL" />
+	    <result column="NO_USE_AMOUNT" property="noUseAmount" jdbcType="DECIMAL" />
+	    <result column="ADVANCE_CHARGE" property="advanceCharge" jdbcType="DECIMAL" />
+	    <result column="REV1" property="rev1" jdbcType="VARCHAR" />
+	    <result column="REV2" property="rev2" jdbcType="VARCHAR" />
+	    <result column="REV3" property="rev3" jdbcType="VARCHAR" />
+	    <result column="CREATEDATE" property="createdate" jdbcType="TIMESTAMP" />
+	    <result column="ISDEL" property="isdel" jdbcType="VARCHAR" />
+	    <!--  inviteCode add  邀请码-->
+	     <result column="INVITE_CODE" property="inviteCode" jdbcType="VARCHAR" />
+	     <!--  -->
+	     <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP" />
+		 <result column="UPDATE_USER_ID" property="updateUserId" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List" >
+	    ID, SUBACCNO_ID, ACCOUNT_NO, MOBILE, EMAIL, WECHAT_NAME, LOG_PASSWORD, USER_TYPE, 
+	    USER_STATE, LEVEL, ID_CHECK_STATE, PAY_PASSWORD, ACCOUNT_TYPE, ACCOUNT_STATE, FREEZE_STATE, 
+	    TOTAL, USE_AMOUNT, NO_USE_AMOUNT, ADVANCE_CHARGE, REV1, REV2, REV3, CREATEDATE, ISDEL,INVITE_CODE,UPDATE_DATE,UPDATE_USER_ID
+	  </sql>
+	
+	<insert id="insertSelective" parameterType="com.zhl.job.pojo.UserLogInfo" >
+	    insert into USERLOGINFO
+	    <trim prefix="(" suffix=")" suffixOverrides="," >
+	      <if test="id != null" >
+	        ID,
+	      </if>
+	      <if test="subaccnoId != null" >
+	        SUBACCNO_ID,
+	      </if>
+	      <if test="accountNo != null" >
+	        ACCOUNT_NO,
+	      </if>
+	      <if test="mobile != null" >
+	        MOBILE,
+	      </if>
+	      <if test="email != null" >
+	        EMAIL,
+	      </if>
+	      <if test="wechatName != null" >
+	        WECHAT_NAME,
+	      </if>
+	      <if test="logPassword != null" >
+	        LOG_PASSWORD,
+	      </if>
+	      <if test="userType != null" >
+	        USER_TYPE,
+	      </if>
+	      <if test="userState != null" >
+	        USER_STATE,
+	      </if>
+	      <if test="level != null" >
+	        LEVEL,
+	      </if>
+	      <if test="idCheckState != null" >
+	        ID_CHECK_STATE,
+	      </if>
+	      <if test="payPassword != null" >
+	        PAY_PASSWORD,
+	      </if>
+	      <if test="accountType != null" >
+	        ACCOUNT_TYPE,
+	      </if>
+	      <if test="accountState != null" >
+	        ACCOUNT_STATE,
+	      </if>
+	      <if test="freezeState != null" >
+	        FREEZE_STATE,
+	      </if>
+	      <if test="total != null" >
+	        TOTAL,
+	      </if>
+	      <if test="useAmount != null" >
+	        USE_AMOUNT,
+	      </if>
+	      <if test="noUseAmount != null" >
+	        NO_USE_AMOUNT,
+	      </if>
+	      <if test="advanceCharge != null" >
+	        ADVANCE_CHARGE,
+	      </if>
+	      <if test="rev1 != null" >
+	        REV1,
+	      </if>
+	      <if test="rev2 != null" >
+	        REV2,
+	      </if>
+	      <if test="rev3 != null" >
+	        REV3,
+	      </if>
+	      <if test="createdate != null" >
+	        CREATEDATE,
+	      </if>
+	      <if test="isdel != null" >
+	        ISDEL,
+	      </if>
+	       <if test="inviteCode != null" >
+	        INVITE_CODE,
+	      </if>
+	      
+	      <!--  -->
+	       <if test="updateDate != null" >
+	        UPDATE_DATE,
+	      </if>
+	      <if test="updateUserId != null" >
+	        UPDATE_USER_ID,
+	      </if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides="," >
+	      <if test="id != null" >
+	        #{id,jdbcType=VARCHAR},
+	      </if>
+	      <if test="subaccnoId != null" >
+	        #{subaccnoId,jdbcType=VARCHAR},
+	      </if>
+	      <if test="accountNo != null" >
+	        #{accountNo,jdbcType=VARCHAR},
+	      </if>
+	      <if test="mobile != null" >
+	        #{mobile,jdbcType=VARCHAR},
+	      </if>
+	      <if test="email != null" >
+	        #{email,jdbcType=VARCHAR},
+	      </if>
+	      <if test="wechatName != null" >
+	        #{wechatName,jdbcType=VARCHAR},
+	      </if>
+	      <if test="logPassword != null" >
+	        #{logPassword,jdbcType=VARCHAR},
+	      </if>
+	      <if test="userType != null" >
+	        #{userType,jdbcType=VARCHAR},
+	      </if>
+	      <if test="userState != null" >
+	        #{userState,jdbcType=VARCHAR},
+	      </if>
+	      <if test="level != null" >
+	        #{level,jdbcType=VARCHAR},
+	      </if>
+	      <if test="idCheckState != null" >
+	        #{idCheckState,jdbcType=VARCHAR},
+	      </if>
+	      <if test="payPassword != null" >
+	        #{payPassword,jdbcType=VARCHAR},
+	      </if>
+	      <if test="accountType != null" >
+	        #{accountType,jdbcType=VARCHAR},
+	      </if>
+	      <if test="accountState != null" >
+	        #{accountState,jdbcType=VARCHAR},
+	      </if>
+	      <if test="freezeState != null" >
+	        #{freezeState,jdbcType=VARCHAR},
+	      </if>
+	      <if test="total != null" >
+	        #{total,jdbcType=DECIMAL},
+	      </if>
+	      <if test="useAmount != null" >
+	        #{useAmount,jdbcType=DECIMAL},
+	      </if>
+	      <if test="noUseAmount != null" >
+	        #{noUseAmount,jdbcType=DECIMAL},
+	      </if>
+	      <if test="advanceCharge != null" >
+	        #{advanceCharge,jdbcType=DECIMAL},
+	      </if>
+	      <if test="rev1 != null" >
+	        #{rev1,jdbcType=VARCHAR},
+	      </if>
+	      <if test="rev2 != null" >
+	        #{rev2,jdbcType=VARCHAR},
+	      </if>
+	      <if test="rev3 != null" >
+	        #{rev3,jdbcType=VARCHAR},
+	      </if>
+	      <if test="createdate != null" >
+	        #{createdate,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="isdel != null" >
+	        #{isdel,jdbcType=VARCHAR},
+	      </if>
+	      <if test="inviteCode != null" >
+	        #{inviteCode,jdbcType=VARCHAR},
+	      </if>
+	      <!--  -->
+	      <if test="updateDate != null" >
+	        #{updateDate,jdbcType=TIMESTAMP},
+	       </if>
+	      <if test="updateUserId != null" >
+	        #{updateUserId,jdbcType=VARCHAR},
+	      </if>
+	    </trim>
+	  </insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.zhl.job.pojo.UserLogInfo" >
+    	update USERLOGINFO
+	    <set >
+	      <if test="subaccnoId != null" >
+	        SUBACCNO_ID = #{subaccnoId,jdbcType=VARCHAR},
+	      </if>
+	      <if test="accountNo != null" >
+	        ACCOUNT_NO = #{accountNo,jdbcType=VARCHAR},
+	      </if>
+	      <if test="mobile != null" >
+	        MOBILE = #{mobile,jdbcType=VARCHAR},
+	      </if>
+	      <if test="email != null" >
+	        EMAIL = #{email,jdbcType=VARCHAR},
+	      </if>
+	      <if test="wechatName != null" >
+	        WECHAT_NAME = #{wechatName,jdbcType=VARCHAR},
+	      </if>
+	      <if test="logPassword != null" >
+	        LOG_PASSWORD = #{logPassword,jdbcType=VARCHAR},
+	      </if>
+	      <if test="userType != null" >
+	        USER_TYPE = #{userType,jdbcType=VARCHAR},
+	      </if>
+	      <if test="userState != null" >
+	        USER_STATE = #{userState,jdbcType=VARCHAR},
+	      </if>
+	      <if test="level != null" >
+	        LEVEL = #{level,jdbcType=VARCHAR},
+	      </if>
+	      <if test="idCheckState != null" >
+	        ID_CHECK_STATE = #{idCheckState,jdbcType=VARCHAR},
+	      </if>
+	      <if test="payPassword != null" >
+	        PAY_PASSWORD = #{payPassword,jdbcType=VARCHAR},
+	      </if>
+	      <if test="accountType != null" >
+	        ACCOUNT_TYPE = #{accountType,jdbcType=VARCHAR},
+	      </if>
+	      <if test="accountState != null" >
+	        ACCOUNT_STATE = #{accountState,jdbcType=VARCHAR},
+	      </if>
+	      <if test="freezeState != null" >
+	        FREEZE_STATE = #{freezeState,jdbcType=VARCHAR},
+	      </if>
+	      <if test="total != null" >
+	        TOTAL = #{total,jdbcType=DECIMAL},
+	      </if>
+	      <if test="useAmount != null" >
+	        USE_AMOUNT = #{useAmount,jdbcType=DECIMAL},
+	      </if>
+	      <if test="noUseAmount != null" >
+	        NO_USE_AMOUNT = #{noUseAmount,jdbcType=DECIMAL},
+	      </if>
+	      <if test="advanceCharge != null" >
+	        ADVANCE_CHARGE = #{advanceCharge,jdbcType=DECIMAL},
+	      </if>
+	      <if test="rev1 != null" >
+	        REV1 = #{rev1,jdbcType=VARCHAR},
+	      </if>
+	      <if test="rev2 != null" >
+	        REV2 = #{rev2,jdbcType=VARCHAR},
+	      </if>
+	      <if test="rev3 != null" >
+	        REV3 = #{rev3,jdbcType=VARCHAR},
+	      </if>
+	      <if test="createdate != null" >
+	        CREATEDATE = #{createdate,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="isdel != null" >
+	        ISDEL = #{isdel,jdbcType=VARCHAR},
+	      </if><!--inviteCode  -->
+	      <if test="inviteCode != null" >
+	        INVITE_CODE = #{inviteCode,jdbcType=VARCHAR},
+	      </if>
+	      <!--  -->
+	      <if test="updateDate != null" >
+	       UPDATE_DATE= #{updateDate,jdbcType=TIMESTAMP},
+	      </if>
+	      <if test="updateUserId != null" >
+	       UPDATE_USER_ID= #{updateUserId,jdbcType=VARCHAR},
+	      </if>
+	    </set>
+	    where ID = #{id,jdbcType=VARCHAR}
+	  </update>
+	  <select id="selectByPk" resultMap="UserLogInfo" parameterType="java.lang.String" >
+		select * from USERLOGINFO  where ID = #{id,jdbcType=VARCHAR}
+	</select>
+	<select id="selectByUserLogInfoState" resultMap="UserLogInfo" parameterType="com.zhl.job.pojo.UserLogInfo" >
+		select * from USERLOGINFO where MOBILE = #{mobile,jdbcType=VARCHAR} 
+	</select>
+	
+	<update id="updateList"  parameterType="java.util.List">
+	   <foreach collection="list" item="item" index="index" open="begin" close=";end;" separator=";">
+	   		update USERLOGINFO 
+			<set>
+				<if test="item.total !=null">
+					TOTAL=#{item.total,jdbcType=DECIMAL},
+				</if>
+			  	<if test="item.useAmount !=null">
+					USE_AMOUNT=#{item.useAmount,jdbcType=DECIMAL}
+				</if>
+			</set>
+			where id = #{item.id}
+	   </foreach>
+    </update>
+	
+	
+	
+	<select id="queryUserLogInfoPage" parameterType="map" resultMap="UserLogInfo">
+		select * from USERLOGINFO 
+			where 1=1 
+			<if test="mobile != null">and mobile = #{mobile}</if>
+			<if test="userType != null" >
+	        USER_TYPE = #{userType,jdbcType=VARCHAR},
+	      </if>
+	      <if test="userState != null" >
+	        USER_STATE = #{userState,jdbcType=VARCHAR},
+	      </if>
+		order by USER_TYPE,CREATEDATE desc
+	</select>
+</mapper>

@@ -1,0 +1,37 @@
+<!-- <%@page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%> -->
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title></title>
+    <script src="../js/jquery.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		//流水号 商户号 钱包账户号 金额 描述 同步地址 ticket 签名
+		function appPay(tranNo,merchId,acctId,money,remark,synchUrl,ticket,sign){
+			$("#tranNo").val(tranNo);
+			$("#merchId").val(merchId);
+			$("#acctId").val(acctId);
+			$("#money").val(money);
+			$("#remark").val(remark);
+			$("#synchUrl").val(synchUrl);
+			$("#ticket").val(ticket);
+			$("#sign").val(sign);
+			$("#payForm").submit();
+		}
+
+	</script>
+</head>
+<body>
+	<form action="${pageContext.request.contextPath}/dhb/walletPay" method="post" id="payForm">
+		<input type="hidden" name="tranNo" id="tranNo" />
+		<input type="hidden" name="merchId" id="merchId" />
+		<input type="hidden" name="acctId" id="acctId" />
+		<input type="hidden" name="money" id="money" />
+		<input type="hidden" name="remark" id="remark" />
+		<input type="hidden" name="synchUrl" id="synchUrl" />
+		<input type="hidden" name="ticket" id="ticket" />
+		<input type="hidden" name="sign" id="sign" />
+	</form>
+</body>
+</html>

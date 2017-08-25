@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhl.job.dao.IWorkInfoDao">
+
+	<resultMap type="com.zhl.job.pojo.WorkInfo" id="workMap" >
+		<id property="id" column="ID" jdbcType="VARCHAR" />
+		<result property="userId" column="USER_ID" jdbcType="VARCHAR" />
+		<result property="cid" column="C_ID" jdbcType="VARCHAR" />
+		<result property="workTitle" column="WORK_TITLE" jdbcType="VARCHAR" />
+		<result property="workDetail" column="WORK_DETAIL" jdbcType="VARCHAR" />
+		<result property="jobName" column="JOB_NAME" jdbcType="VARCHAR" />
+		<result property="jobType" column="JOB_TYPE" jdbcType="VARCHAR" />
+		<result property="require" column="REQUIRE" jdbcType="VARCHAR" />
+		<result property="sexRequire" column="SEX_REQUIRE" jdbcType="VARCHAR" />
+		<result property="workMeal" column="WORK_MEAL" jdbcType="VARCHAR" />
+		<result property="province" column="PROVINCE" jdbcType="VARCHAR" />
+		<result property="city" column="CITY" jdbcType="VARCHAR" />
+		<result property="cityName" column="CITY_NAME" jdbcType="VARCHAR" />
+		<result property="area" column="AREA" jdbcType="VARCHAR" />
+		<result property="areaName" column="AREA_NAME" jdbcType="VARCHAR" />
+		<result property="addressDetail" column="ADDRESS_DETAIL" jdbcType="VARCHAR" />
+		<result property="releaseStartDate" column="RELEASE_START_DATE" jdbcType="TIMESTAMP" />
+		<result property="applyEndDate" column="APPLY_END_DATE" jdbcType="TIMESTAMP" />
+		<result property="workStartDate" column="WORK_START_DATE" jdbcType="TIMESTAMP" />
+		<result property="workEndDate" column="WORK_END_DATE" jdbcType="TIMESTAMP" />
+		<result property="workTime" column="WORK_TIME" jdbcType="VARCHAR" />
+		<result property="allowChooseDate" column="ALLOW_CHOOSE_DATE" jdbcType="VARCHAR" />
+		<result property="workHour" column="WORK_HOUR" jdbcType="VARCHAR" />
+		<result property="peopleNum" column="PEOPLE_NUM" jdbcType="VARCHAR" />
+		<result property="balanceType" column="BALANCE_TYPE" jdbcType="VARCHAR" />
+		<result property="money" column="MONEY" jdbcType="DECIMAL" />
+		<result property="moneyType" column="MONEY_TYPE" jdbcType="VARCHAR" />
+		<result property="workdayNum" column="WORKDAY_NUM" jdbcType="VARCHAR" />
+		<result property="contacts" column="CONTACTS" jdbcType="VARCHAR" />
+		<result property="contactsMobile" column="CONTACTS_MOBILE" jdbcType="VARCHAR" />
+		<result property="contactsEmail" column="CONTACTS_EMAIL" jdbcType="VARCHAR" />
+		<result property="agreement" column="AGREEMENT" jdbcType="VARCHAR" />
+		<result property="longitude" column="LONGITUDE" jdbcType="VARCHAR" />
+		<result property="latitude" column="LATITUDE" jdbcType="VARCHAR" />
+		<result property="releaseType" column="RELEASE_TYPE" jdbcType="VARCHAR" />
+		<result property="type" column="TYPE" jdbcType="VARCHAR" />
+		<result property="state" column="STATE" jdbcType="VARCHAR" />
+		<result property="createdate" column="CREATEDATE" jdbcType="TIMESTAMP" />
+		<result property="updateDate" column="UPDATEDATE" jdbcType="TIMESTAMP" />
+		<result property="updateName" column="UPDATENAME" jdbcType="VARCHAR" />
+		<result property="interview" column="INTERVIEW" jdbcType="VARCHAR" />
+		<result property="applySwitch" column="APPLY_SWITCH" jdbcType="VARCHAR" />
+		<result property="isdel" column="ISDEL" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap type="WorkInfo" id="workAllMap" extends="workMap">
+		<association property="workInfoStatis" javaType="WorkInfoStatis">
+    		<id property="id" column="WS_ID"/>
+    		<result property="workId" column="WORK_ID"/>
+    		<result property="loadNum" column="LOAD_NUM"/>
+    		<result property="applyNum" column="APPLY_NUM"/>
+    		<result property="commentNum" column="COMMENT_NUM"/>
+    		<result property="attentionNum" column="ATTENTION_NUM"/>
+    		<result property="employNum" column="EMPLOY_NUM" />
+    		
+    		<result property="type" column="WS_TYPE"/>
+    		<result property="state" column="WS_STATE"/>
+    		<result property="createdate" column="WS_CREATEDATE"/>
+    		<result property="isdel" column="WS_ISDEL"/>
+    	</association>
+	</resultMap>
+	<resultMap type="WorkInfo" id="workAndCompanyMap" extends="workAllMap">
+		<association property="companyInfo" javaType="CompanyInfo">
+			<id property="cid" column="C_ID"/>
+		    <result property="companyName" column="COMPANY_NAME"/>
+		    <result property="logoImg" column="LOGO_IMG"/>
+		    <result property="companyType" column="COMPANY_TYPE"/>
+		    <result property="companyPeopleNum" column="COMPANY_PEOPLE_NUM"/>
+		    <result property="companyDetail" column="COMPANY_DETAIL"/>
+		</association>
+	</resultMap>
+	<resultMap type="WorkInfo" id="workAndApplyMap" extends="workAllMap">
+		<association property="applyInfo" javaType="ApplyInfo">
+			<id property="id" column="AP_ID"/>
+		    <result property="applyDetail" column="APPLY_DETAIL"/>
+		    <result property="applyWorkDate" column="APPLY_WORK_DATE"/>
+		    <result property="applyWorkTime" column="APPLY_WORK_TIME"/>
+		    <result property="employ" column="EMPLOY"/>
+		</association>
+	</resultMap>
+	
+	
+	
+<!-- 公用sql -->
+	
+	<sql id="Base_Column_List">
+		ID, USER_ID, C_ID, WORK_TITLE, WORK_DETAIL, JOB_NAME,
+		JOB_TYPE, REQUIRE, SEX_REQUIRE, WORK_MEAL, PROVINCE, CITY, CITY_NAME, AREA, AREA_NAME, 
+		ADDRESS_DETAIL, RELEASE_START_DATE, APPLY_END_DATE, WORK_START_DATE, 
+		WORK_END_DATE, WORK_TIME, ALLOW_CHOOSE_DATE, WORK_HOUR, PEOPLE_NUM, BALANCE_TYPE, MONEY, MONEY_TYPE,
+		WORKDAY_NUM, CONTACTS, CONTACTS_MOBILE, CONTACTS_EMAIL, AGREEMENT,
+		LONGITUDE, LATITUDE, RELEASE_TYPE, TYPE, STATE, CREATEDATE, UPDATEDATE, UPDATENAME, INTERVIEW, APPLY_SWITCH, ISDEL
+	</sql>
+	
+	<sql id="Base_Column_List_all">
+		wi.ID, wi.USER_ID, wi.C_ID, wi.WORK_TITLE, wi.WORK_DETAIL, wi.JOB_NAME,
+		wi.JOB_TYPE, wi.REQUIRE, wi.SEX_REQUIRE, wi.WORK_MEAL, wi.PROVINCE, wi.CITY, wi.CITY_NAME, wi.AREA, wi.AREA_NAME, 
+		wi.ADDRESS_DETAIL, wi.RELEASE_START_DATE, wi.APPLY_END_DATE, wi.WORK_START_DATE, 
+		wi.WORK_END_DATE, wi.WORK_TIME, wi.ALLOW_CHOOSE_DATE, wi.WORK_HOUR, wi.PEOPLE_NUM, wi.BALANCE_TYPE, wi.MONEY, wi.MONEY_TYPE,
+		wi.WORKDAY_NUM, wi.CONTACTS, wi.CONTACTS_MOBILE, wi.CONTACTS_EMAIL, wi.AGREEMENT, wi.LONGITUDE,  wi.LATITUDE, 
+		wi.RELEASE_TYPE, wi.TYPE, wi.STATE, wi.CREATEDATE, wi.UPDATEDATE, wi.UPDATENAME, wi.INTERVIEW, wi.APPLY_SWITCH, wi.ISDEL, 
+		ws.ID as WS_ID, ws.WORK_ID, ws.LOAD_NUM, ws.APPLY_NUM, ws.COMMENT_NUM, ws.ATTENTION_NUM, ws.EMPLOY_NUM,
+		ws.TYPE as WS_TYPE, ws.STATE as WS_STATE, ws.CREATEDATE as WS_CREATEDATE, ws.ISDEL as WS_ISDEL
+	</sql>
+	
+	<sql id="Base_Column_company_List">
+		wi.ID, wi.USER_ID, wi.C_ID, wi.WORK_TITLE, wi.WORK_DETAIL, wi.JOB_NAME,
+		wi.JOB_TYPE, wi.REQUIRE, wi.SEX_REQUIRE, wi.WORK_MEAL, wi.PROVINCE, wi.CITY, wi.CITY_NAME, wi.AREA, wi.AREA_NAME, 
+		wi.ADDRESS_DETAIL, wi.RELEASE_START_DATE, wi.APPLY_END_DATE, wi.WORK_START_DATE, 
+		wi.WORK_END_DATE, wi.WORK_TIME, wi.ALLOW_CHOOSE_DATE, wi.WORK_HOUR, wi.PEOPLE_NUM, wi.BALANCE_TYPE, wi.MONEY, wi.MONEY_TYPE,
+		wi.WORKDAY_NUM, wi.CONTACTS, wi.CONTACTS_MOBILE, wi.CONTACTS_EMAIL, wi.AGREEMENT, wi.LONGITUDE,  wi.LATITUDE, 
+		wi.RELEASE_TYPE, wi.TYPE, wi.STATE, wi.CREATEDATE, wi.UPDATEDATE, wi.UPDATENAME, wi.INTERVIEW, wi.APPLY_SWITCH, wi.ISDEL, 
+		ws.ID as WS_ID, ws.WORK_ID, ws.LOAD_NUM, ws.APPLY_NUM, ws.COMMENT_NUM, ws.ATTENTION_NUM, ws.EMPLOY_NUM,
+		ws.TYPE as WS_TYPE, ws.STATE as WS_STATE, ws.CREATEDATE as WS_CREATEDATE, ws.ISDEL as WS_ISDEL,
+		ci.COMPANY_NAME, ci.LOGO_IMG, ci.COMPANY_TYPE, ci.COMPANY_PEOPLE_NUM, ci.COMPANY_DETAIL
+	</sql>
+	
+	<!-- 标记为未删除的 -->
+	<sql id="Base_Column_isdel">
+		 and ISDEL = '00'
+	</sql>
+	<sql id="Base_Column_isdel_as">
+		 and wi.ISDEL = '00'
+	</sql>
+	
+	
+<!-- select -->	
+
+	<!-- 根据id查询 -->
+	<select id="queryById" parameterType="java.lang.String" resultMap="workMap">
+		select 
+		<include refid="Base_Column_List"/> 
+		from workinfo 
+		<where>
+			ID = #{id}
+			<include refid="Base_Column_isdel"/> 
+		</where>
+	</select>
+	
+	<!-- 分页查询列表 -->
+	<select id="queryWorkInfoPage" parameterType="map" resultMap="workAndCompanyMap">
+		select 
+		<include refid="Base_Column_company_List"/> 
+		from workinfo wi, workinfo_statis ws , companyinfo ci 
+		<where>
+			wi.ID = ws.WORK_ID and wi.C_ID = ci.C_ID 
+			<if test="city != null and city != ''">
+				and wi.CITY = #{city} 
+			</if>
+			<if test="jobType != null and jobType != ''">
+				and wi.JOB_TYPE = #{jobType} 
+			</if>
+			<if test="area != null and area != ''">
+				and wi.AREA = #{area} 
+			</if>
+			<if test="type != null and type != ''">
+				and wi.TYPE = #{type} 
+			</if>
+			<if test="sexRequire != null and sexRequire != ''">
+				and wi.SEX_REQUIRE = #{sexRequire} 
+			</if>
+			<if test="jobDay != null and jobDay != ''">
+				and wi.WORK_START_DATE &lt;= #{jobDay} and wi.WORK_END_DATE &gt;=#{jobDay}
+			</if>
+			<if test="cid != null and cid != ''">
+				and wi.C_ID = #{cid}
+			</if>
+			<if test="seachLike != null and seachLike != ''">
+				and wi.WORK_TITLE like '%'||#{seachLike}||'%'
+			</if>
+			and wi.STATE in ('01','02') and wi.ISDEL = '00' order by CREATEDATE desc
+		</where>
+	</select>
+	
+	<!-- 分页按状态查询列表 -->
+	<select id="queryWorkInfoPageByState" parameterType="map" resultMap="workAndCompanyMap">
+		select 
+		<include refid="Base_Column_company_List"/> 
+		from workinfo wi, workinfo_statis ws , companyinfo ci 
+		<where>
+			wi.ID = ws.WORK_ID and wi.C_ID = ci.C_ID 
+			<if test="state != null and state != ''">
+				and wi.STATE = #{state} 
+			</if>
+			<if test="userId != null and userId != ''">
+				and wi.USER_ID = #{userId} 
+			</if>
+			<if test="cid != null and cid != ''">
+				and wi.C_ID = #{cid} 
+			</if>
+			<include refid="Base_Column_isdel_as"/> 
+			order by wi.CREATEDATE desc
+		</where>
+	</select>
+	
+	<!-- 根据workid查询企业发布单条详细信息 -->
+	<select id="queryWorkInfoDetail" parameterType="java.lang.String" resultMap="workAndCompanyMap">
+		select 
+		<include refid="Base_Column_company_List"/> 
+		from workinfo wi, workinfo_statis ws, companyinfo ci 
+		<where>
+			wi.ID = ws.WORK_ID and wi.C_ID = ci.C_ID 
+			<if test="id != null and id != ''">
+				 and wi.ID = #{id}
+			</if>
+		</where>
+	</select>
+	
+	<!-- 查询列表（不分页）需要什么参数后期可以加 -->
+	<select id="queryWorkInfoByCondition" parameterType="map" resultMap="workAllMap">
+		select 
+		<include refid="Base_Column_List_all"/> 
+		from workinfo wi, workinfo_statis ws 
+		<where>
+			wi.ID = ws.WORK_ID
+			<if test="state != null and state != ''">and wi.STATE = #{state}</if>
+			<if test="workEndDate != null and workEndDate != ''">and wi.WORK_END_DATE = #{workEndDate}</if>
+			<if test="userId != null and userId != ''">and wi.USER_ID = #{userId}</if>
+			<if test="cid != null and cid != ''">and wi.C_ID = #{cid}</if>
+			<include refid="Base_Column_isdel_as"/> 
+			order by wi.CREATEDATE desc
+		</where>
+	</select>
+	
+
+<!-- update -->
+
+	<!-- 修改发布信息 -->
+	<update id="updateWorkInfo" parameterType="WorkInfo">
+		update workinfo 
+		<set>
+			<if test="workTitle != null and workTitle != ''">
+				WORK_TITLE = #{workTitle},
+			</if>
+			<if test="workDetail != null and workDetail != ''">
+				WORK_DETAIL = #{workDetail},
+			</if>
+			<if test="jobName != null and jobName != ''">
+				JOB_NAME = #{jobName},
+			</if>
+			<if test="jobType != null and jobType != ''">
+				JOB_TYPE = #{jobType},
+			</if>
+			<if test="require != null and require != ''">
+				REQUIRE = #{require},
+			</if>
+			<if test="sexRequire != null and sexRequire != ''">
+				SEX_REQUIRE = #{sexRequire},
+			</if>
+			<if test="workMeal != null and workMeal != ''">
+				WORK_MEAL = #{workMeal},
+			</if>
+			<if test="province != null and province != ''">
+				PROVINCE = #{province},
+			</if>
+			<if test="city != null and city != ''">
+				CITY = #{city},
+			</if>
+			<if test="cityName != null and cityName != ''">
+				CITY_NAME = #{cityName},
+			</if>
+			<if test="area != null and area != ''">
+				AREA = #{area},
+			</if>
+			<if test="areaName != null and areaName != ''">
+				AREA_NAME = #{areaName},
+			</if>
+			<if test="addressDetail != null and addressDetail != ''">
+				ADDRESS_DETAIL = #{addressDetail},
+			</if>
+			<if test="releaseStartDate != null and releaseStartDate != ''">
+				RELEASE_START_DATE = #{releaseStartDate},
+			</if>
+			<if test="applyEndDate != null and applyEndDate != ''">
+				APPLY_END_DATE = #{applyEndDate},
+			</if>
+			<if test="workStartDate != null and workStartDate != ''">
+				WORK_START_DATE = #{workStartDate},
+			</if>
+			<if test="workEndDate != null and workEndDate != ''">
+				WORK_END_DATE = #{workEndDate},
+			</if>
+			<if test="workTime != null and workTime != ''">
+				WORK_TIME = #{workTime},
+			</if>
+			<if test="allowChooseDate != null and allowChooseDate != ''">
+				ALLOW_CHOOSE_DATE = #{allowChooseDate},
+			</if>
+			<if test="workHour != null and workHour != ''">
+				WORK_HOUR = #{workHour},
+			</if>
+			<if test="peopleNum != null and peopleNum != ''">
+				PEOPLE_NUM = #{peopleNum},
+			</if>
+			<if test="balanceType != null and balanceType != ''">
+				BALANCE_TYPE = #{balanceType},
+			</if>
+			<if test="money != null and money != ''">
+				MONEY = #{money},
+			</if>
+			<if test="moneyType != null and moneyType != ''">
+				MONEY_TYPE = #{moneyType},
+			</if>
+			<if test="workdayNum != null and workdayNum != ''">
+				WORKDAY_NUM = #{workdayNum},
+			</if>
+			<if test="contacts != null and contacts != ''">
+				CONTACTS = #{contacts},
+			</if>
+			<if test="contactsMobile != null and contactsMobile != ''">
+				CONTACTS_MOBILE = #{contactsMobile},
+			</if>
+			<if test="contactsEmail != null and contactsEmail != ''">
+				CONTACTS_EMAIL = #{contactsEmail},
+			</if>
+			<if test="createdate != null and createdate != ''">
+				CREATEDATE = #{createdate},
+			</if>
+			<if test="updateDate != null and updateDate != ''">
+				UPDATEDATE = #{updateDate},
+			</if>
+			<if test="updateName != null and updateName != ''">
+				UPDATENAME = #{updateName},
+			</if>
+			<if test="interview != null and interview != ''">
+				INTERVIEW = #{interview},
+			</if>
+			<if test="longitude != null and longitude != ''">
+				LONGITUDE = #{longitude},
+			</if>
+			<if test="latitude != null and latitude != ''">
+				LATITUDE = #{latitude},
+			</if>
+			<if test="releaseType != null and releaseType != ''">
+				RELEASE_TYPE = #{releaseType},
+			</if>
+			<if test="state != null and state != ''">
+				STATE = #{state},
+			</if>
+			<if test="type != null and type != ''">
+				TYPE = #{type},
+			</if>
+			<if test="applySwitch != null and applySwitch != ''">
+				APPLY_SWITCH = #{applySwitch},
+			</if>
+		</set>
+		<where>
+           	ID = #{id}
+		</where>
+	</update>
+	
+	<!-- 批量修改 -->
+	<update id="batchUpdateWorkInfos"  parameterType="java.util.List">
+	   <foreach collection="list" item="item" index="index" open="begin" close=";end;" separator=";">
+	   		update workinfo 
+			<set>
+			  	<if test="item.state!=null and item.state!=''">
+					STATE=#{item.state}
+				</if>
+			</set>
+			where ID = #{item.id}
+	   </foreach>
+    </update>
+	
+<!-- insert -->	
+	<!-- 写入-->
+ 	<insert id="addWorkInfo" parameterType="WorkInfo" useGeneratedKeys="true" keyProperty="id"> 
+ 		insert into workinfo 
+ 		(
+ 		<include refid="Base_Column_List" />
+ 		) 
+ 		values 
+ 		( 
+			#{id}, #{userId}, #{cid}, #{workTitle}, #{workDetail}, #{jobName}, 
+			#{jobType}, #{require}, #{sexRequire}, #{workMeal}, #{province}, #{city}, #{cityName}, #{area}, #{areaName}, 
+			#{addressDetail}, #{releaseStartDate}, #{applyEndDate}, #{workStartDate}, 
+			#{workEndDate}, #{workTime}, #{allowChooseDate}, #{workHour}, #{peopleNum}, #{balanceType}, #{money}, #{moneyType}, 
+			#{workdayNum}, #{contacts}, #{contactsMobile}, #{contactsEmail}, #{agreement}, 
+			#{longitude}, #{latitude}, #{releaseType}, #{type}, #{state}, #{createdate}, #{updateDate}, #{updateName}, #{interview}, 
+			#{applySwitch}, #{isdel}
+		)
+	</insert> 
+	
+	<!-- 分页查询列表 -->
+	<select id="queryWorkInfoPageForManager" parameterType="map" resultMap="workAllMap">
+		select 
+		<include refid="Base_Column_List_all"/> 
+		from workinfo wi, workinfo_statis ws 
+		<where>
+			wi.ID = ws.WORK_ID
+			<if test="state != null">and wi.STATE = #{state}</if>
+			order by wi.CREATEDATE desc
+		</where>
+	</select>
+	
+	<update id="updateWorkInfoById" parameterType="com.zhl.job.pojo.WorkInfo">
+		update workinfo 
+		set STATE = #{state},
+			UPDATEDATE = #{updateDate},
+			UPDATENAME = #{updateName}
+		where
+           	ID = #{id}
+	</update>
+	
+</mapper>

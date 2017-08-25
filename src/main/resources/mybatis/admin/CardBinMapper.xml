@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhl.job.dao.ICardBinDao">
+
+	<resultMap id="CardBinMap" type="com.zhl.job.pojo.CardBin" >
+		<id column="ID" property="id"/>
+	    <result column="CREATEDDATE" property="createdDate"/>
+	    <result column="BANKINFO_ID" property="bankinfoId"/>
+	    <result column="CARDBIN" property="cardBin"/>
+	    <result column="CARDBINLEN" property="cardBinLen"/>
+	    <result column="CARDLEN" property="cardLen"/>
+	    <result column="CARDBINTYPE" property="cardBinType"/>
+	    <result column="ISSINCCODE" property="issincCode"/>
+	    <result column="ISSINCNAME" property="issincName"/>
+	    <result column="CARDNAME" property="cardName"/>
+	    <result column="STATE" property="state"/>
+	    <result column="CREATENAME" property="createName"/>
+	    <result column="UPDATEDATE" property="updateDate"/>
+	    <result column="UPDATENAME" property="updateName"/>
+	    <result column="REMARK" property="reMark"/>
+	    <result column="ISAUDIT" property="isAudit"/>
+	</resultMap>
+	
+	<sql id="Base_Column_List" >
+	    ID, CREATEDDATE, BANKINFO_ID, CARDBIN, CARDBINLEN, CARDLEN, CARDBINTYPE, ISSINCCODE, ISSINCNAME, 
+	    CARDNAME, STATE, CREATENAME, UPDATEDATE, UPDATENAME, REMARK, ISAUDIT
+	</sql>
+	
+	<select id="queryCardBinAll" resultMap="CardBinMap">
+	    select 
+	    <include refid="Base_Column_List" />
+	    from CARDBIN
+  	</select>
+</mapper>

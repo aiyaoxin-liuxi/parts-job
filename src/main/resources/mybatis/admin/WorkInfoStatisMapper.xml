@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhl.job.dao.IWorkInfoStatisDao">
+
+	<resultMap type="WorkInfoStatis" id="workInfoStatisMap" >
+		<id property="id" column="id" />
+		<result property="workId" column="WORK_ID" />
+		<result property="loadNum" column="LOAD_NUM" />
+		<result property="applyNum" column="APPLY_NUM" />
+		<result property="commentNum" column="COMMENT_NUM" />
+		<result property="attentionNum" column="ATTENTION_NUM" />
+		<result property="employNum" column="EMPLOY_NUM" />
+		<result property="type" column="TYPE" />
+		<result property="state" column="STATE" />
+		<result property="createdate" column="CREATEDATE" />
+		<result property="isdel" column="ISDEL" />
+	</resultMap>
+	
+	<sql id="Base_Column_List">
+		ID, WORK_ID, LOAD_NUM, APPLY_NUM, COMMENT_NUM, ATTENTION_NUM, EMPLOY_NUM, 
+		TYPE, STATE, CREATEDATE, ISDEL
+	</sql>
+	
+	<!-- 标记为未删除的 -->
+	<sql id="Base_Column_isdel">
+		 and ISDEL = '00'
+	</sql>
+	
+	<select id="queryWsInfoByWorkId" parameterType="map" resultMap="workInfoStatisMap">
+		select 
+		<include refid="Base_Column_List" /> 
+		from workinfo_statis 
+		<where>
+			<if test="id != null and id != ''"> and ID=#{id}</if>
+			<if test="workId != null and workId != ''"> and WORK_ID=#{workId}</if>
+			<if test="type != null and type != ''"> and TYPE=#{type}</if>
+			<if test="state != null and state != ''"> and STATE=#{state}</if>
+			<include refid="Base_Column_isdel"/> 
+		</where>
+	</select>
+
+	<!-- 写入-->
+ 	<insert id="addWorkInfoStatis" parameterType="WorkInfoStatis" useGeneratedKeys="true" keyProperty="id"> 
+ 		insert into workinfo_statis 
+ 		(
+ 		<include refid="Base_Column_List" />
+ 		) 
+ 		values 
+ 		(
+			#{id}, #{workId}, #{loadNum}, #{applyNum}, #{commentNum}, #{attentionNum}, ${employNum}, 
+			#{type}, #{state}, #{createdate}, #{isdel}
+		)
+	</insert> 
+	
+	<!-- 修改浏览次数 -->
+	<update id="updateNum" parameterType="WorkInfoStatis" >
+		update workinfo_statis 
+		<set>
+			<if test="loadNum != null">
+				LOAD_NUM = #{loadNum},
+			</if>
+			<if test="applyNum != null">
+				APPLY_NUM = #{applyNum},
+			</if>
+			<if test="commentNum != null">
+				COMMENT_NUM = #{commentNum},
+			</if>
+			<if test="attentionNum != null">
+				ATTENTION_NUM = #{attentionNum},
+			</if>
+			<if test="employNum != null">
+				EMPLOY_NUM = #{employNum},
+			</if>
+		</set>
+		where ID = #{id}
+	</update>
+
+</mapper>
